@@ -18,6 +18,11 @@
     return [super alloc];
 }
 
+- (BOOL) walking
+{
+    return walking_;
+}
+
 
 - (id) init
 {

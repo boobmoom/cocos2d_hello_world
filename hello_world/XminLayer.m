@@ -36,6 +36,7 @@
 
 - (void) command: (NSString *) com
 {
+    if([[self player] walking]){return;}
     CCSprite  *box_sprite;
     int step_distance = 32;
     if ([self isWallAtDirection:com atPosition:[self player].sprite.position]) {

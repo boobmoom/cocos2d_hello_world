@@ -25,4 +25,6 @@
 
 - (void) walk: (NSString *) direction;
 
+- (BOOL) walking;
+
 @end
