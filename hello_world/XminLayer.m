@@ -78,7 +78,6 @@
 
 - (void) checkWin
 {
-    CCScene *winScene = [CCScene node];
     NSEnumerator *enumerator = [_boxes objectEnumerator];
     CCSprite *box_sprite;
     int s = 0;
@@ -94,6 +93,13 @@
     }
     
     if (s == [_boxes count]){
+        CCScene *winScene = [CCScene node];
+        CCLayer *winLayer = [CCLayer node];
+        CCLabelTTF *label = [CCLabelTTF labelWithString:@"You Win" fontName:@"Marker Felt" fontSize:30];
+        CGSize screenSize = [[CCDirector sharedDirector] winSize];
+        label.position = ccp(screenSize.width/2,screenSize.height/2);
+        [winLayer addChild:label];
+        [winScene addChild: winLayer];
         [[CCDirector sharedDirector] replaceScene: winScene];
     }
 }
@@ -195,10 +201,10 @@
 
 - (void) dealloc
 {
-    [_boxes dealloc];
-    [player_ dealloc];
-    [_tileMap dealloc];
-    [_background dealloc];
+//    [_boxes dealloc];
+//    [player_ dealloc];
+//    [_tileMap dealloc];
+//    [_background dealloc];
     [super dealloc];
 }
 

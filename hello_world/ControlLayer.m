@@ -99,7 +99,6 @@
 
 - (void) dealloc
 {
-    [receiver dealloc];
     [super dealloc];
 }
 

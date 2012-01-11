@@ -129,7 +129,6 @@
 		549573DD14B5529400DFE169 /* XminLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 549573DC14B5529400DFE169 /* XminLayer.m */; };
 		549573E314B552F900DFE169 /* ControlLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 549573E214B552F900DFE169 /* ControlLayer.m */; };
 		549573E614B5532000DFE169 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 549573E514B5532000DFE169 /* Player.m */; };
-		549573E914B5858000DFE169 /* HelloWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = 549573E814B5857F00DFE169 /* HelloWorld.m */; };
 		549573EB14B5869700DFE169 /* Player.png in Resources */ = {isa = PBXBuildFile; fileRef = 549573EA14B5869700DFE169 /* Player.png */; };
 		549573ED14B586A200DFE169 /* Projectile.png in Resources */ = {isa = PBXBuildFile; fileRef = 549573EC14B586A200DFE169 /* Projectile.png */; };
 		549573EF14B586AC00DFE169 /* Target.png in Resources */ = {isa = PBXBuildFile; fileRef = 549573EE14B586AC00DFE169 /* Target.png */; };
@@ -382,8 +381,6 @@
 		549573E214B552F900DFE169 /* ControlLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlLayer.m; sourceTree = "<group>"; };
 		549573E414B5531F00DFE169 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		549573E514B5532000DFE169 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
-		549573E714B5857D00DFE169 /* HelloWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloWorld.h; sourceTree = "<group>"; };
-		549573E814B5857F00DFE169 /* HelloWorld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelloWorld.m; sourceTree = "<group>"; };
 		549573EA14B5869700DFE169 /* Player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Player.png; path = ../../../../Desktop/Player.png; sourceTree = "<group>"; };
 		549573EC14B586A200DFE169 /* Projectile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Projectile.png; path = ../../../../Desktop/Projectile.png; sourceTree = "<group>"; };
 		549573EE14B586AC00DFE169 /* Target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Target.png; path = ../../../../Desktop/Target.png; sourceTree = "<group>"; };
@@ -457,8 +454,6 @@
 				549573E214B552F900DFE169 /* ControlLayer.m */,
 				549573E414B5531F00DFE169 /* Player.h */,
 				549573E514B5532000DFE169 /* Player.m */,
-				549573E714B5857D00DFE169 /* HelloWorld.h */,
-				549573E814B5857F00DFE169 /* HelloWorld.m */,
 				540033DD14AEDEC900384EAC /* Resources */,
 				540033F114AEDEC900384EAC /* libs */,
 				5400352A14AEDECD00384EAC /* Supporting Files */,
@@ -977,7 +972,6 @@
 				549573DD14B5529400DFE169 /* XminLayer.m in Sources */,
 				549573E314B552F900DFE169 /* ControlLayer.m in Sources */,
 				549573E614B5532000DFE169 /* Player.m in Sources */,
-				549573E914B5858000DFE169 /* HelloWorld.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
