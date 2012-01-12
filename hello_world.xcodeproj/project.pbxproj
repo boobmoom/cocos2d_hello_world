@@ -125,7 +125,6 @@
 		5400354314AEF11D00384EAC /* alien.png in Resources */ = {isa = PBXBuildFile; fileRef = 5400354214AEF11D00384EAC /* alien.png */; };
 		5479361714B6E38500C1BB41 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 5479361614B6E38500C1BB41 /* down.png */; };
 		54793F2214BBD3A30064D312 /* tmw_desert_spacing.png in Resources */ = {isa = PBXBuildFile; fileRef = 54793F2114BBD3A30064D312 /* tmw_desert_spacing.png */; };
-		54793F2614BC2F4D0064D312 /* boxes.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 54793F2514BC2F4D0064D312 /* boxes.tmx */; };
 		549573DD14B5529400DFE169 /* XminLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 549573DC14B5529400DFE169 /* XminLayer.m */; };
 		549573E314B552F900DFE169 /* ControlLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 549573E214B552F900DFE169 /* ControlLayer.m */; };
 		549573E614B5532000DFE169 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 549573E514B5532000DFE169 /* Player.m */; };
@@ -133,6 +132,7 @@
 		549573ED14B586A200DFE169 /* Projectile.png in Resources */ = {isa = PBXBuildFile; fileRef = 549573EC14B586A200DFE169 /* Projectile.png */; };
 		549573EF14B586AC00DFE169 /* Target.png in Resources */ = {isa = PBXBuildFile; fileRef = 549573EE14B586AC00DFE169 /* Target.png */; };
 		54C0DC3714B3EAB100151A7F /* sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = 54C0DC3614B3EAB100151A7F /* sprite.png */; };
+		54F9DC6414BE7118007FB44A /* boxes.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 54F9DC6314BE7118007FB44A /* boxes.tmx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -374,7 +374,6 @@
 		5400354214AEF11D00384EAC /* alien.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = alien.png; path = "../../../../Documents/develop/Itterheim Source Code/CH04_code/DoodleDrop01/Resources/alien.png"; sourceTree = "<group>"; };
 		5479361614B6E38500C1BB41 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = down.png; path = ../../../../Desktop/down.png; sourceTree = "<group>"; };
 		54793F2114BBD3A30064D312 /* tmw_desert_spacing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tmw_desert_spacing.png; sourceTree = "<group>"; };
-		54793F2514BC2F4D0064D312 /* boxes.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = boxes.tmx; sourceTree = "<group>"; };
 		549573DB14B5529300DFE169 /* XminLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XminLayer.h; sourceTree = "<group>"; };
 		549573DC14B5529400DFE169 /* XminLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XminLayer.m; sourceTree = "<group>"; };
 		549573E114B552F900DFE169 /* ControlLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlLayer.h; sourceTree = "<group>"; };
@@ -385,6 +384,7 @@
 		549573EC14B586A200DFE169 /* Projectile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Projectile.png; path = ../../../../Desktop/Projectile.png; sourceTree = "<group>"; };
 		549573EE14B586AC00DFE169 /* Target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Target.png; path = ../../../../Desktop/Target.png; sourceTree = "<group>"; };
 		54C0DC3614B3EAB100151A7F /* sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sprite.png; path = ../../../../Desktop/sprite.png; sourceTree = "<group>"; };
+		54F9DC6314BE7118007FB44A /* boxes.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = boxes.tmx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -464,7 +464,7 @@
 		540033DD14AEDEC900384EAC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				54793F2514BC2F4D0064D312 /* boxes.tmx */,
+				54F9DC6314BE7118007FB44A /* boxes.tmx */,
 				54793F2114BBD3A30064D312 /* tmw_desert_spacing.png */,
 				5479361614B6E38500C1BB41 /* down.png */,
 				549573EE14B586AC00DFE169 /* Target.png */,
@@ -860,7 +860,7 @@
 				549573EF14B586AC00DFE169 /* Target.png in Resources */,
 				5479361714B6E38500C1BB41 /* down.png in Resources */,
 				54793F2214BBD3A30064D312 /* tmw_desert_spacing.png in Resources */,
-				54793F2614BC2F4D0064D312 /* boxes.tmx in Resources */,
+				54F9DC6414BE7118007FB44A /* boxes.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

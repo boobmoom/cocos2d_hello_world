@@ -15,12 +15,13 @@
  </tileset>
  <layer name="background" width="12" height="10">
   <data encoding="base64" compression="zlib">
-   eJzjYmBg4CIRyyFhXOJyeMRxYXxm6WHh41NPqvkDqZ7Y8CI1nkAYALW3Ckk=
+   eJzjYmBg4CIRyyFhXOJyeMSxYXzmE9JDyFwQrUcl87nQ2HokqNfDoh8fH18YEYsBhfcKHQ==
   </data>
  </layer>
  <objectgroup name="player" width="12" height="10">
   <object name="player" x="64" y="96" width="32" height="32"/>
   <object name="box2" x="160" y="160" width="32" height="32"/>
   <object name="box1" x="192" y="64" width="32" height="32"/>
+  <object name="box3" x="96" y="128" width="32" height="32"/>
  </objectgroup>
 </map>
