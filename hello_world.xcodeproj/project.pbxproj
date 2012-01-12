@@ -122,16 +122,12 @@
 		5400353014AEDECD00384EAC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5400352F14AEDECD00384EAC /* AppDelegate.m */; };
 		5400353314AEDECD00384EAC /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5400353214AEDECD00384EAC /* RootViewController.m */; };
 		5400353F14AEEE3200384EAC /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5400353E14AEEE3200384EAC /* GameLayer.m */; };
-		5400354314AEF11D00384EAC /* alien.png in Resources */ = {isa = PBXBuildFile; fileRef = 5400354214AEF11D00384EAC /* alien.png */; };
-		5479361714B6E38500C1BB41 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 5479361614B6E38500C1BB41 /* down.png */; };
+		5479361714B6E38500C1BB41 /* sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = 5479361614B6E38500C1BB41 /* sprite.png */; };
 		54793F2214BBD3A30064D312 /* tmw_desert_spacing.png in Resources */ = {isa = PBXBuildFile; fileRef = 54793F2114BBD3A30064D312 /* tmw_desert_spacing.png */; };
 		549573DD14B5529400DFE169 /* XminLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 549573DC14B5529400DFE169 /* XminLayer.m */; };
 		549573E314B552F900DFE169 /* ControlLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 549573E214B552F900DFE169 /* ControlLayer.m */; };
 		549573E614B5532000DFE169 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 549573E514B5532000DFE169 /* Player.m */; };
-		549573EB14B5869700DFE169 /* Player.png in Resources */ = {isa = PBXBuildFile; fileRef = 549573EA14B5869700DFE169 /* Player.png */; };
-		549573ED14B586A200DFE169 /* Projectile.png in Resources */ = {isa = PBXBuildFile; fileRef = 549573EC14B586A200DFE169 /* Projectile.png */; };
-		549573EF14B586AC00DFE169 /* Target.png in Resources */ = {isa = PBXBuildFile; fileRef = 549573EE14B586AC00DFE169 /* Target.png */; };
-		54C0DC3714B3EAB100151A7F /* sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = 54C0DC3614B3EAB100151A7F /* sprite.png */; };
+		54C0DC3714B3EAB100151A7F /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 54C0DC3614B3EAB100151A7F /* down.png */; };
 		54F9DC6414BE7118007FB44A /* boxes.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 54F9DC6314BE7118007FB44A /* boxes.tmx */; };
 /* End PBXBuildFile section */
 
@@ -371,8 +367,7 @@
 		5400353714AEDECD00384EAC /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
 		5400353D14AEEE3100384EAC /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
 		5400353E14AEEE3200384EAC /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
-		5400354214AEF11D00384EAC /* alien.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = alien.png; path = "../../../../Documents/develop/Itterheim Source Code/CH04_code/DoodleDrop01/Resources/alien.png"; sourceTree = "<group>"; };
-		5479361614B6E38500C1BB41 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = down.png; path = ../../../../Desktop/down.png; sourceTree = "<group>"; };
+		5479361614B6E38500C1BB41 /* sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sprite.png; sourceTree = "<group>"; };
 		54793F2114BBD3A30064D312 /* tmw_desert_spacing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tmw_desert_spacing.png; sourceTree = "<group>"; };
 		549573DB14B5529300DFE169 /* XminLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XminLayer.h; sourceTree = "<group>"; };
 		549573DC14B5529400DFE169 /* XminLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XminLayer.m; sourceTree = "<group>"; };
@@ -380,10 +375,7 @@
 		549573E214B552F900DFE169 /* ControlLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlLayer.m; sourceTree = "<group>"; };
 		549573E414B5531F00DFE169 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		549573E514B5532000DFE169 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
-		549573EA14B5869700DFE169 /* Player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Player.png; path = ../../../../Desktop/Player.png; sourceTree = "<group>"; };
-		549573EC14B586A200DFE169 /* Projectile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Projectile.png; path = ../../../../Desktop/Projectile.png; sourceTree = "<group>"; };
-		549573EE14B586AC00DFE169 /* Target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Target.png; path = ../../../../Desktop/Target.png; sourceTree = "<group>"; };
-		54C0DC3614B3EAB100151A7F /* sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sprite.png; path = ../../../../Desktop/sprite.png; sourceTree = "<group>"; };
+		54C0DC3614B3EAB100151A7F /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		54F9DC6314BE7118007FB44A /* boxes.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = boxes.tmx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -466,12 +458,8 @@
 			children = (
 				54F9DC6314BE7118007FB44A /* boxes.tmx */,
 				54793F2114BBD3A30064D312 /* tmw_desert_spacing.png */,
-				5479361614B6E38500C1BB41 /* down.png */,
-				549573EE14B586AC00DFE169 /* Target.png */,
-				549573EC14B586A200DFE169 /* Projectile.png */,
-				549573EA14B5869700DFE169 /* Player.png */,
-				54C0DC3614B3EAB100151A7F /* sprite.png */,
-				5400354214AEF11D00384EAC /* alien.png */,
+				5479361614B6E38500C1BB41 /* sprite.png */,
+				54C0DC3614B3EAB100151A7F /* down.png */,
 				540033DE14AEDEC900384EAC /* Default.png */,
 				540033E014AEDEC900384EAC /* fps_images.png */,
 				540033E214AEDEC900384EAC /* Icon-72.png */,
@@ -853,12 +841,8 @@
 				540033EB14AEDEC900384EAC /* Icon.png in Resources */,
 				540033ED14AEDEC900384EAC /* Icon@2x.png in Resources */,
 				540033F014AEDEC900384EAC /* iTunesArtwork in Resources */,
-				5400354314AEF11D00384EAC /* alien.png in Resources */,
-				54C0DC3714B3EAB100151A7F /* sprite.png in Resources */,
-				549573EB14B5869700DFE169 /* Player.png in Resources */,
-				549573ED14B586A200DFE169 /* Projectile.png in Resources */,
-				549573EF14B586AC00DFE169 /* Target.png in Resources */,
-				5479361714B6E38500C1BB41 /* down.png in Resources */,
+				54C0DC3714B3EAB100151A7F /* down.png in Resources */,
+				5479361714B6E38500C1BB41 /* sprite.png in Resources */,
 				54793F2214BBD3A30064D312 /* tmw_desert_spacing.png in Resources */,
 				54F9DC6414BE7118007FB44A /* boxes.tmx in Resources */,
 			);
