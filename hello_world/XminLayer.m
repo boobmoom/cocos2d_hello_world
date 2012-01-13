@@ -253,7 +253,6 @@
 
 - (void) dealloc
 {
-    // TODO how to release these variables;
     [_boxes dealloc];
     [player_ dealloc];
     [super dealloc];
