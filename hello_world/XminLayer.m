@@ -20,112 +20,22 @@
 {
     CCScene *scene = [CCScene node];
     XminLayer *layer = [XminLayer node];
-
-    
-    CCSprite *down_button = [CCSprite spriteWithFile:@"down.png"];
-    CCSprite *down_button_selected = [CCSprite spriteWithFile:@"down.png"];
-    CCMenuItemSprite *downItem = [CCMenuItemSprite itemFromNormalSprite: down_button selectedSprite:down_button_selected target: layer selector: @selector(walkDown)];
-    downItem.position = CGPointMake(40 + 20, 20);
-    
-    CCSprite *left_button = [CCSprite spriteWithFile:@"down.png"];
-    CCSprite *left_button_selected = [CCSprite spriteWithFile:@"down.png"];
-    CCMenuItemSprite *leftItem = [CCMenuItemSprite itemFromNormalSprite: left_button selectedSprite:left_button_selected  target: layer selector: @selector(walkLeft)];
-    leftItem.rotation = 90;
-    leftItem.position = CGPointMake(20 , 40+20);
-    
-    CCSprite *right_button = [CCSprite spriteWithFile:@"down.png"];
-    CCSprite *right_button_selected = [CCSprite spriteWithFile:@"down.png"];
-    CCMenuItemSprite *rightItem = [CCMenuItemSprite itemFromNormalSprite: right_button selectedSprite:right_button_selected target: layer selector: @selector(walkRight)];
-    rightItem.rotation = -90;
-    rightItem.position = CGPointMake(80 + 20, 40+20);
-    
-    CCSprite *up_button = [CCSprite spriteWithFile:@"down.png"];
-    CCSprite *up_button_selected = [CCSprite spriteWithFile:@"down.png"];
-    CCMenuItemSprite *upItem = [CCMenuItemSprite itemFromNormalSprite: up_button selectedSprite:up_button_selected target: layer selector: @selector(walkUp)];
-    upItem.rotation = 180;
-    upItem.position = CGPointMake(40+20, 80+20);
-    
-    CCMenu *control_layer = [CCMenu menuWithItems: downItem , rightItem , leftItem , upItem ,nil];
-    
-    control_layer.contentSize = CGSizeMake(120, 120);
-    CGSize win_size = [[CCDirector sharedDirector] winSize];
-    control_layer.position = CGPointMake(win_size.width - 120 ,0);
-    control_layer.scale = 0.6;
-    
-    
+    Controller *controller = [Controller controlWithGameLayer:layer];
+    [layer addController: controller];
     [scene addChild: layer];
-    [scene addChild: control_layer];
-
-
     return scene;
 }
 
-
--(void) walkDown
+- (BOOL) lastCommandExecuting
 {
-    [self command: @"down"];
+    return [[self player] walking];
 }
 
--(void) walkUp
-{
-    [self command: @"up"];    
-}
 
-- (void) walkLeft
-{
-    [self command: @"left"];    
-}
-
-- (void) walkRight
-{
-    [self command: @"right"];    
-}
 
 - (CCSprite *) playerSprite
 {
     return [[self player] sprite];
-}
-
-- (void) command: (NSString *) com
-{
-    if([[self player] walking]){return;}
-    CCSprite  *box_sprite;
-    int step_distance = 32;
-    if ([self isWallAtDirection:com atPosition:[self player].sprite.position]) {
-        
-        
-    }else{
-        box_sprite = [self boxAtDirection:com atPosition:[self playerSprite].position];
-        if(box_sprite) {
-            if ([self isWallAtDirection:com atPosition:box_sprite.position]) {
-                //box can't move
-//                CCLOG(@"can't move");
-            }else{
-                //box can move
-                [[self player] walk: com];  
-                
-                CCMoveBy *moveAction;
-                CCCallFunc *checkWin;
-                if(com == @"down")
-                    moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(0.0, -step_distance)] ;
-                if(com == @"up")
-                    moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(0.0, step_distance)] ;
-                if(com == @"left")
-                    moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(-step_distance , 0.0)] ;
-                if(com == @"right")
-                    moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(step_distance , 0.0)] ;
-                checkWin = [CCCallFunc actionWithTarget:self selector:@selector(checkWin)];
-                [box_sprite runAction: [CCSequence actions:moveAction, checkWin , nil]];
-
-//                CCLOG(@"can move");
-            }
-        }else{
-            //no box
-            [[self player] walk: com];
-        }
-
-    }
-
 }
 
 - (void) checkWin
@@ -154,6 +64,77 @@
         [winScene addChild: winLayer];
         [[CCDirector sharedDirector] replaceScene: winScene];
     }
+}
+
+- (void) playerMove:(NSString *)direction
+{
+    [[self player] walk:direction];
+}
+
+- (void) playerPush:(NSString *)direction
+{
+    int step_distance = _tileMap.tileSize.width;
+    CCSprite *boxSprite = [self boxByPlayer:direction];
+    [[self player] walk:direction];
+    CCMoveBy *moveAction;
+    CCCallFunc *checkWin;
+    if(direction == @"down")
+        moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(0.0, -step_distance)] ;
+    if(direction == @"up")
+        moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(0.0, step_distance)] ;
+    if(direction == @"left")
+        moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(-step_distance , 0.0)] ;
+    if(direction == @"right")
+        moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(step_distance , 0.0)] ;
+    checkWin = [CCCallFunc actionWithTarget:self selector:@selector(checkWin)];
+    [boxSprite runAction: [CCSequence actions:moveAction, checkWin , nil]];
+}
+
+
+- (BOOL) playerMoveAble: (NSString *) direction
+{
+    CGPoint playerPos = [self playerSprite].position;
+    CCSprite *boxSprite = [self boxByPlayer:direction];
+    // not wall and not boxes  then return YES;
+    return ![self isWallAtDirection:direction atPosition:playerPos] && !boxSprite;
+}
+
+- (BOOL)playerPushAble:(NSString *)direction
+{
+    CCSprite *boxSprite;
+    boxSprite = [self boxByPlayer:direction];
+    if(boxSprite){        
+        if( [self isWallAtDirection:direction atPosition:boxSprite.position]){
+            return NO;
+        }else{
+            return YES;
+        }
+    }else{
+        return NO;
+    }
+}
+
+- (CCSprite *) boxByPlayer: (NSString *) direction
+{
+    CGPoint playerPos = [self playerSprite].position;
+    CGPoint boxPos ;
+    if(direction == @"left")
+        boxPos = ccp(playerPos.x - 32 , playerPos.y);
+    if(direction == @"right")
+        boxPos = ccp(playerPos.x + 32 , playerPos.y);
+    if(direction == @"down")
+        boxPos = ccp(playerPos.x , playerPos.y - 32);
+    if(direction == @"up")
+        boxPos = ccp(playerPos.x , playerPos.y + 32);
+    NSEnumerator *enumerator;
+    enumerator = [_boxes objectEnumerator];
+    CCSprite *box_sprite;
+    while (box_sprite = [enumerator nextObject] ) {
+        if (CGPointEqualToPoint(boxPos , box_sprite.position)) {
+            return box_sprite;
+        }
+    }
+    return nil;
 }
 
 - (CGPoint) nextStep: direction atPosition: (CGPoint) curPos
@@ -195,23 +176,6 @@
     
 };
 
-- (CCSprite *) boxAtDirection: (NSString *) direction atPosition: (CGPoint) curPos
-{
-    NSEnumerator *enumerator;
-    enumerator = [_boxes objectEnumerator];
-    CGPoint nextStep = [self nextStep: direction atPosition: curPos];
-    CCSprite *box_sprite;
-    CGPoint boxPos;
-    while (box_sprite = [enumerator nextObject] ) {
-        boxPos = [self toMapXY:box_sprite.position];
-        if (CGPointEqualToPoint(nextStep , boxPos)) {
-            return box_sprite;
-        }
-    }
-    return nil;
-}
-
-
 
 - (id) init
 {
@@ -246,15 +210,22 @@
             [self addChild: box_sprite];
             [_boxes addObject:box_sprite];
         }
-        
     }
     return self;
+}
+
+- (void) addController: (Controller *) ctr
+{
+    controller_ = ctr;
+    [controller_ retain];
+    [self addChild:[ctr layer]];
 }
 
 - (void) dealloc
 {
     [_boxes dealloc];
     [player_ dealloc];
+    [controller_ dealloc];
     [super dealloc];
 }
 

@@ -9,18 +9,21 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Player.h"
+#import "Controller.h"
 
 
 enum {
     kTagForPlayer,
     kTagForBackground
 };
+@class Controller;
 
 @interface XminLayer : CCLayer {
     Player *player_;      
     CCTMXTiledMap *_tileMap;
     CCTMXLayer *_background;
     NSMutableArray *_boxes;
+    Controller *controller_;
 }
 
 @property (nonatomic , assign , readwrite) Player *player;
@@ -29,13 +32,9 @@ enum {
 
 + (CCScene *) scene;
 
-- (void) command: (NSString *) com;
-
 - (BOOL) isWallAtDirection: (NSString *) direction atPosition: (CGPoint) curPos;
 
 - (CGPoint) nextStep: direction atPosition: (CGPoint) curPos;
-
-- (CCSprite *) boxAtDirection: (NSString *) direction atPosition: (CGPoint) curPos;
 
 - (CCSprite *) playerSprite;
 
@@ -43,6 +42,18 @@ enum {
 
 - (void) checkWin;
 
+- (CCSprite *) boxByPlayer: (NSString *) direction;
 
+- (BOOL) playerMoveAble: (NSString *) direction;
+
+- (BOOL) playerPushAble: (NSString *) direction;
+
+- (void) playerMove: (NSString *) direction;
+
+- (void) playerPush: (NSString *) direction;
+
+- (BOOL) lastCommandExecuting;
+
+- (void) addController: (Controller *) ctr;
 
 @end
