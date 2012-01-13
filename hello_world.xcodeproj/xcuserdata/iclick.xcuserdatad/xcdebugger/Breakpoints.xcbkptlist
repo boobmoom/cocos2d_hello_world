@@ -36,20 +36,6 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "hello_world/ControlLayer.m"
-         timestampString = "347609306.663979"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "81"
-         endingLineNumber = "81"
-         landmarkName = "-ccTouchBegan:withEvent:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
          filePath = "hello_world/Map.m"
          timestampString = "347728615.478104"
          startingColumnNumber = "9223372036854775807"
@@ -79,11 +65,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "hello_world/XminLayer.m"
-         timestampString = "347966156.464467"
+         timestampString = "348131082.900955"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "43"
-         endingLineNumber = "43"
+         startingLineNumber = "95"
+         endingLineNumber = "95"
          landmarkName = "-command:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -93,11 +79,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "hello_world/XminLayer.m"
-         timestampString = "347967071.606585"
+         timestampString = "348131082.900955"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "160"
-         endingLineNumber = "160"
+         startingLineNumber = "212"
+         endingLineNumber = "212"
          landmarkName = "-boxAtDirection:atPosition:"
          landmarkType = "5">
       </FileBreakpoint>
