@@ -121,6 +121,7 @@
 		5400352D14AEDECD00384EAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5400352C14AEDECD00384EAC /* main.m */; };
 		5400353014AEDECD00384EAC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5400352F14AEDECD00384EAC /* AppDelegate.m */; };
 		5400353314AEDECD00384EAC /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5400353214AEDECD00384EAC /* RootViewController.m */; };
+		54702CA014C01F1800B6D1DC /* boxes1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 54702C9F14C01F1800B6D1DC /* boxes1.tmx */; };
 		5479361714B6E38500C1BB41 /* sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = 5479361614B6E38500C1BB41 /* sprite.png */; };
 		54793F2214BBD3A30064D312 /* tmw_desert_spacing.png in Resources */ = {isa = PBXBuildFile; fileRef = 54793F2114BBD3A30064D312 /* tmw_desert_spacing.png */; };
 		549573DD14B5529400DFE169 /* XminLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 549573DC14B5529400DFE169 /* XminLayer.m */; };
@@ -363,6 +364,7 @@
 		5400353114AEDECD00384EAC /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		5400353214AEDECD00384EAC /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		5400353714AEDECD00384EAC /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
+		54702C9F14C01F1800B6D1DC /* boxes1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = boxes1.tmx; sourceTree = "<group>"; };
 		5479361614B6E38500C1BB41 /* sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sprite.png; sourceTree = "<group>"; };
 		54793F2114BBD3A30064D312 /* tmw_desert_spacing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tmw_desert_spacing.png; sourceTree = "<group>"; };
 		549573DB14B5529300DFE169 /* XminLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XminLayer.h; sourceTree = "<group>"; };
@@ -446,6 +448,7 @@
 		540033DD14AEDEC900384EAC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				54702C9F14C01F1800B6D1DC /* boxes1.tmx */,
 				54F9DC6314BE7118007FB44A /* boxes.tmx */,
 				54793F2114BBD3A30064D312 /* tmw_desert_spacing.png */,
 				5479361614B6E38500C1BB41 /* sprite.png */,
@@ -835,6 +838,7 @@
 				5479361714B6E38500C1BB41 /* sprite.png in Resources */,
 				54793F2214BBD3A30064D312 /* tmw_desert_spacing.png in Resources */,
 				54F9DC6414BE7118007FB44A /* boxes.tmx in Resources */,
+				54702CA014C01F1800B6D1DC /* boxes1.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

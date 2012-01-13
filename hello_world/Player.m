@@ -94,7 +94,6 @@
 
 - (void) dealloc
 {
-    [sprite_ dealloc];
     [animations dealloc];
     [super dealloc];
 }

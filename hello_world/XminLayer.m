@@ -217,7 +217,7 @@
 {
     if(self = [super init]){
         //add map
-        _tileMap = [CCTMXTiledMap tiledMapWithTMXFile:@"boxes.tmx"];
+        _tileMap = [CCTMXTiledMap tiledMapWithTMXFile:@"boxes1.tmx"];
         _background = [_tileMap layerNamed:@"background"];
         CCTMXObjectGroup *objects = [_tileMap objectGroupNamed:@"player"];
         NSMutableDictionary *playerPoint = [objects objectNamed:@"player"];
@@ -254,10 +254,8 @@
 - (void) dealloc
 {
     // TODO how to release these variables;
-//    [_boxes dealloc];
-//    [player_ dealloc];
-//    [_tileMap dealloc];
-//    [_background dealloc];
+    [_boxes dealloc];
+    [player_ dealloc];
     [super dealloc];
 }
 
