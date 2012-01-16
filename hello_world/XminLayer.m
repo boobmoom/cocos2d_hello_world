@@ -60,7 +60,7 @@
         if([stage_ intValue] < [StageLayer totalStages]){
             nextScene = [XminLayer sceneWithStage: ([stage_ intValue] + 1)];
         }else{
-            CCScene *nextScene = [CCScene node];
+            nextScene = [CCScene node];
             CCLayer *winLayer = [CCLayer node];
             CCLabelTTF *label = [CCLabelTTF labelWithString:@"You Win" fontName:@"Marker Felt" fontSize:30];
             CGSize screenSize = [[CCDirector sharedDirector] winSize];
