@@ -121,6 +121,9 @@
 		5400352D14AEDECD00384EAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5400352C14AEDECD00384EAC /* main.m */; };
 		5400353014AEDECD00384EAC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5400352F14AEDECD00384EAC /* AppDelegate.m */; };
 		5400353314AEDECD00384EAC /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5400353214AEDECD00384EAC /* RootViewController.m */; };
+		546E1A7214C3BBAB00C73A25 /* BoxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 546E1A7114C3BBAB00C73A25 /* BoxMenu.m */; };
+		546E1A7614C3C65F00C73A25 /* StageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 546E1A7514C3C65F00C73A25 /* StageLayer.m */; };
+		546E1A7814C4157D00C73A25 /* boxes2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 546E1A7714C4157D00C73A25 /* boxes2.tmx */; };
 		54702CA014C01F1800B6D1DC /* boxes1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 54702C9F14C01F1800B6D1DC /* boxes1.tmx */; };
 		54702CA314C0293E00B6D1DC /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 54702CA214C0293E00B6D1DC /* Controller.m */; };
 		5479361714B6E38500C1BB41 /* sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = 5479361614B6E38500C1BB41 /* sprite.png */; };
@@ -128,7 +131,7 @@
 		549573DD14B5529400DFE169 /* XminLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 549573DC14B5529400DFE169 /* XminLayer.m */; };
 		549573E614B5532000DFE169 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 549573E514B5532000DFE169 /* Player.m */; };
 		54C0DC3714B3EAB100151A7F /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 54C0DC3614B3EAB100151A7F /* down.png */; };
-		54F9DC6414BE7118007FB44A /* boxes.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 54F9DC6314BE7118007FB44A /* boxes.tmx */; };
+		54F9DC6414BE7118007FB44A /* boxes3.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 54F9DC6314BE7118007FB44A /* boxes3.tmx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -365,6 +368,11 @@
 		5400353114AEDECD00384EAC /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		5400353214AEDECD00384EAC /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		5400353714AEDECD00384EAC /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
+		546E1A7014C3BBAB00C73A25 /* BoxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxMenu.h; sourceTree = "<group>"; };
+		546E1A7114C3BBAB00C73A25 /* BoxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxMenu.m; sourceTree = "<group>"; };
+		546E1A7414C3C65F00C73A25 /* StageLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageLayer.h; sourceTree = "<group>"; };
+		546E1A7514C3C65F00C73A25 /* StageLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageLayer.m; sourceTree = "<group>"; };
+		546E1A7714C4157D00C73A25 /* boxes2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = boxes2.tmx; sourceTree = "<group>"; };
 		54702C9F14C01F1800B6D1DC /* boxes1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = boxes1.tmx; sourceTree = "<group>"; };
 		54702CA114C0293E00B6D1DC /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
 		54702CA214C0293E00B6D1DC /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
@@ -375,7 +383,7 @@
 		549573E414B5531F00DFE169 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		549573E514B5532000DFE169 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		54C0DC3614B3EAB100151A7F /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
-		54F9DC6314BE7118007FB44A /* boxes.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = boxes.tmx; sourceTree = "<group>"; };
+		54F9DC6314BE7118007FB44A /* boxes3.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = boxes3.tmx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -443,6 +451,10 @@
 				549573E514B5532000DFE169 /* Player.m */,
 				54702CA114C0293E00B6D1DC /* Controller.h */,
 				54702CA214C0293E00B6D1DC /* Controller.m */,
+				546E1A7014C3BBAB00C73A25 /* BoxMenu.h */,
+				546E1A7114C3BBAB00C73A25 /* BoxMenu.m */,
+				546E1A7414C3C65F00C73A25 /* StageLayer.h */,
+				546E1A7514C3C65F00C73A25 /* StageLayer.m */,
 				540033DD14AEDEC900384EAC /* Resources */,
 				540033F114AEDEC900384EAC /* libs */,
 				5400352A14AEDECD00384EAC /* Supporting Files */,
@@ -453,8 +465,9 @@
 		540033DD14AEDEC900384EAC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				546E1A7714C4157D00C73A25 /* boxes2.tmx */,
 				54702C9F14C01F1800B6D1DC /* boxes1.tmx */,
-				54F9DC6314BE7118007FB44A /* boxes.tmx */,
+				54F9DC6314BE7118007FB44A /* boxes3.tmx */,
 				54793F2114BBD3A30064D312 /* tmw_desert_spacing.png */,
 				5479361614B6E38500C1BB41 /* sprite.png */,
 				54C0DC3614B3EAB100151A7F /* down.png */,
@@ -842,8 +855,9 @@
 				54C0DC3714B3EAB100151A7F /* down.png in Resources */,
 				5479361714B6E38500C1BB41 /* sprite.png in Resources */,
 				54793F2214BBD3A30064D312 /* tmw_desert_spacing.png in Resources */,
-				54F9DC6414BE7118007FB44A /* boxes.tmx in Resources */,
+				54F9DC6414BE7118007FB44A /* boxes3.tmx in Resources */,
 				54702CA014C01F1800B6D1DC /* boxes1.tmx in Resources */,
+				546E1A7814C4157D00C73A25 /* boxes2.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -954,6 +968,8 @@
 				549573DD14B5529400DFE169 /* XminLayer.m in Sources */,
 				549573E614B5532000DFE169 /* Player.m in Sources */,
 				54702CA314C0293E00B6D1DC /* Controller.m in Sources */,
+				546E1A7214C3BBAB00C73A25 /* BoxMenu.m in Sources */,
+				546E1A7614C3C65F00C73A25 /* StageLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -98,7 +98,6 @@
 - (void) command: (NSString *) direction
 {
     if([gameLayer_ lastCommandExecuting]){return;}
-    CCLOG(@"xx");
     BOOL check = [gameLayer_ playerMoveAble: direction] ;
     if (check) {
         [gameLayer_ playerMove: direction];       

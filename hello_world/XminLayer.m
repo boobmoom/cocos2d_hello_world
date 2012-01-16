@@ -16,10 +16,10 @@
 @synthesize tileMap = _tileMap;
 @synthesize background = _background;
 
-+ (CCScene *) scene
++ (CCScene *) sceneWithStage: (int) stage
 {
     CCScene *scene = [CCScene node];
-    XminLayer *layer = [XminLayer node];
+    XminLayer *layer = [[XminLayer alloc] initWithStage:stage];
     Controller *controller = [Controller controlWithGameLayer:layer];
     [layer addController: controller];
     [scene addChild: layer];
@@ -55,14 +55,20 @@
     }
     
     if (s == [_boxes count]){
-        CCScene *winScene = [CCScene node];
-        CCLayer *winLayer = [CCLayer node];
-        CCLabelTTF *label = [CCLabelTTF labelWithString:@"You Win" fontName:@"Marker Felt" fontSize:30];
-        CGSize screenSize = [[CCDirector sharedDirector] winSize];
-        label.position = ccp(screenSize.width/2,screenSize.height/2);
-        [winLayer addChild:label];
-        [winScene addChild: winLayer];
-        [[CCDirector sharedDirector] replaceScene: winScene];
+
+        CCScene *nextScene;
+        if([stage_ intValue] < [StageLayer totalStages]){
+            nextScene = [XminLayer sceneWithStage: ([stage_ intValue] + 1)];
+        }else{
+            CCScene *nextScene = [CCScene node];
+            CCLayer *winLayer = [CCLayer node];
+            CCLabelTTF *label = [CCLabelTTF labelWithString:@"You Win" fontName:@"Marker Felt" fontSize:30];
+            CGSize screenSize = [[CCDirector sharedDirector] winSize];
+            label.position = ccp(screenSize.width/2,screenSize.height/2);
+            [winLayer addChild:label];
+            [nextScene addChild: winLayer];
+        }
+        [[CCDirector sharedDirector] replaceScene: nextScene];
     }
 }
 
@@ -177,11 +183,23 @@
 };
 
 
+- (id) initWithStage: (int) stage
+{
+    stage_ =  [NSNumber numberWithInt:stage] ;
+    [[self init] autorelease];
+    return self;
+}
+
+
 - (id) init
 {
     if(self = [super init]){
         //add map
-        _tileMap = [CCTMXTiledMap tiledMapWithTMXFile:@"boxes1.tmx"];
+        if (!stage_) {
+            stage_ = [NSNumber numberWithInt:1];
+        }
+        NSString *mapStr = [NSString stringWithFormat:@"boxes%d.tmx" , [stage_ intValue]];
+        _tileMap = [CCTMXTiledMap tiledMapWithTMXFile: mapStr];
         _background = [_tileMap layerNamed:@"background"];
         CCTMXObjectGroup *objects = [_tileMap objectGroupNamed:@"player"];
         NSMutableDictionary *playerPoint = [objects objectNamed:@"player"];
@@ -210,8 +228,26 @@
             [self addChild: box_sprite];
             [_boxes addObject:box_sprite];
         }
+        [self addMenu];
     }
     return self;
+}
+
+
+- (void) addMenu
+{
+    
+    CCLabelTTF *mainMenu = [CCLabelTTF labelWithString:@"主菜单" fontName:@"Marker Felt" fontSize:30];
+    CCMenuItemLabel *mainMenuLabel = [CCMenuItemLabel itemWithLabel:mainMenu  target:self selector:@selector(mainMenu)];
+    CCMenu *menu = [CCMenu menuWithItems:mainMenuLabel,nil];
+    menu.contentSize = mainMenuLabel.contentSize;
+    menu.position = ccp(384 + menu.contentSize.width/2  , 200 + menu.contentSize.height/2);
+    [self addChild:menu];
+}
+
+-(void) mainMenu
+{
+    [[CCDirector sharedDirector] replaceScene:[BoxMenu scene]];
 }
 
 - (void) addController: (Controller *) ctr
@@ -223,6 +259,7 @@
 
 - (void) dealloc
 {
+    [stage_ dealloc];
     [_boxes dealloc];
     [player_ dealloc];
     [controller_ dealloc];

@@ -13,6 +13,7 @@
 //#import "GameLayer.h"
 #import "RootViewController.h"
 #import "XminLayer.h"
+#import "BoxMenu.h"
 
 @implementation AppDelegate
 
@@ -111,7 +112,7 @@
 	[self removeStartupFlicker];
 	
 	// Run the intro Scene
-	[[CCDirector sharedDirector] runWithScene: [XminLayer scene]];
+	[[CCDirector sharedDirector] runWithScene: [BoxMenu scene]];
 }
 
 

@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "Player.h"
 #import "Controller.h"
+#import "BoxMenu.h"
 
 
 enum {
@@ -24,13 +25,14 @@ enum {
     CCTMXLayer *_background;
     NSMutableArray *_boxes;
     Controller *controller_;
+    NSNumber *stage_;
 }
 
 @property (nonatomic , assign , readwrite) Player *player;
 @property (nonatomic, retain) CCTMXTiledMap *tileMap;
 @property (nonatomic, retain) CCTMXLayer *background;
 
-+ (CCScene *) scene;
++ (CCScene *) sceneWithStage: (int) stage;
 
 - (BOOL) isWallAtDirection: (NSString *) direction atPosition: (CGPoint) curPos;
 
@@ -56,4 +58,9 @@ enum {
 
 - (void) addController: (Controller *) ctr;
 
+- (void) addMenu;
+
+-(void) mainMenu;
+
+- (id) initWithStage: (int) stage;
 @end
