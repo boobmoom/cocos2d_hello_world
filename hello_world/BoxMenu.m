@@ -33,7 +33,7 @@
 {
     CCLabelTTF *newGame = [CCLabelTTF labelWithString:@"新游戏" fontName:@"Marker Felt" fontSize:30];
     CCLabelTTF *selectStage = [CCLabelTTF labelWithString:@"选择关卡" fontName:@"Marker Felt" fontSize:30];
-    CCLabelTTF *exitGame = [CCLabelTTF labelWithString:@"退出游戏" fontName:@"Marker Felt" fontSize:30];
+    CCLabelTTF *exitGame = [CCLabelTTF labelWithString:@"待定" fontName:@"Marker Felt" fontSize:30];
     CCMenuItemLabel *newGameLabel = [CCMenuItemLabel itemWithLabel:newGame  target:self selector:@selector(newGame)];
     CCMenuItemLabel *selectStageLabel = [CCMenuItemLabel itemWithLabel:selectStage  target:self selector:@selector(selectStage)];
     CCMenuItemLabel *exitGameLabel = [CCMenuItemLabel itemWithLabel:exitGame  target:self selector:@selector(exitGame)];
