@@ -68,7 +68,11 @@
             [winLayer addChild:label];
             [nextScene addChild: winLayer];
         }
-        [[CCDirector sharedDirector] replaceScene: nextScene];
+        CCTransitionFlipX *transitionScene = [CCTransitionFlipX transitionWithDuration:0.6 scene:nextScene orientation:kOrientationRightOver];
+//        CCActionInterval *rightSlideSceneAction;
+
+        
+        [[CCDirector sharedDirector] replaceScene:transitionScene];
     }
 }
 
@@ -194,10 +198,6 @@
 - (id) init
 {
     if(self = [super init]){
-        //add map
-        if (!stage_) {
-            stage_ = [NSNumber numberWithInt:1];
-        }
         NSString *mapStr = [NSString stringWithFormat:@"boxes%d.tmx" , [stage_ intValue]];
         _tileMap = [CCTMXTiledMap tiledMapWithTMXFile: mapStr];
         _background = [_tileMap layerNamed:@"background"];
