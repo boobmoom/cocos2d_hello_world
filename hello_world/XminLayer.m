@@ -75,7 +75,7 @@
         direction  = @"left";
     }
     if ([step boxPushed]){
-        [[self player] walk:direction];     
+        [[self player] walk:direction back:YES];
         int step_distance = _tileMap.tileSize.width;
         CCSprite *boxSprite = [self boxByPlayer:[step direction]];
         CCMoveBy *moveAction;
@@ -90,7 +90,7 @@
         [boxSprite runAction: moveAction];
         
     }else{
-        [[self player] walk:direction];        
+        [[self player] walk:direction back:YES];
     }
     [lastSteps_ removeObjectAtIndex:0];
     [lastSteps_ addObject:@"nil"];

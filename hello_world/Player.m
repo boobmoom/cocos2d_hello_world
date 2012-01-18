@@ -28,13 +28,43 @@
 {
     if(self = [super  init]){
         animations = [[NSMutableDictionary alloc] init];
+        backAnimations_ = [[NSMutableDictionary alloc] init];
         [self setSprite: [CCSprite spriteWithFile: @"sprite.png" rect:CGRectMake(0, 0, 32, 48)]];
         [[self sprite] setScale:0.65];
         [self setWalkAnimation]; 
+        [self setBackAnimation];
         step_distance = 32;
         walking_ = NO;
     }
     return self;
+}
+
+- (void) setBackAnimation
+{
+    // TODO refactor   
+    CCTexture2D *texture = [[CCTextureCache sharedTextureCache] addImage:@"sprite.png"];
+    CCAnimation *walk_right_animation = [CCAnimation animation];
+    int i; 
+    for( i = 3 ; i >= 0 ; i--){
+        [walk_right_animation addFrameWithTexture:texture rect:CGRectMake( 32 * i , 96, 32, 48)];
+    }
+    [backAnimations_ setValue:walk_right_animation forKey: @"left"];
+    CCAnimation *walk_left_animation = [CCAnimation animation];
+    for( i = 3 ; i >= 0 ; i--){
+        [walk_left_animation addFrameWithTexture:texture rect:CGRectMake( 32 * i , 48, 32, 48)];
+    }
+    [backAnimations_ setValue:walk_left_animation forKey: @"right"];
+    CCAnimation *walk_up_animation = [CCAnimation animation];
+    for( i = 3 ; i >= 0 ; i--){
+        [walk_up_animation addFrameWithTexture:texture rect:CGRectMake( 32 * i , 144, 32, 48)];
+    }
+    [backAnimations_ setValue:walk_up_animation forKey: @"down"];
+    CCAnimation *walk_down_animation = [CCAnimation animation];
+    for( i = 3 ; i >= 0 ; i--){
+        [walk_down_animation addFrameWithTexture:texture rect:CGRectMake( 32 * i , 0, 32, 48)];
+    }
+    [backAnimations_ setValue:walk_down_animation forKey: @"up"];
+ 
 }
 
 - (void) setWalkAnimation
@@ -66,14 +96,23 @@
 
 - (void) walk: (NSString *) direction
 {
+    [self walk:direction back:NO];
+}
+
+- (void) walk: (NSString *) direction back: (BOOL) back
+{
     if (walking_) {
         return;
     }
     walking_ = YES;
     CCAnimation *animation;
-    animation = [animations valueForKey: direction];
+    if(back){
+        animation = [backAnimations_ valueForKey: direction];
+    }else{
+        animation = [animations valueForKey: direction];
+    }
     NSAssert( animation!=nil, @"Animate: argument Animation must be non-nil");
-    [[self sprite] runAction:[CCAnimate actionWithDuration:0.3 animation: animation restoreOriginalFrame:NO]];
+    [[self sprite] runAction:[CCAnimate actionWithDuration:0.3 animation: animation restoreOriginalFrame:NO] ];
     CCMoveBy *moveAction;
     if(direction == @"down")
         moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(0.0, -step_distance)] ;
@@ -83,7 +122,8 @@
         moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(-step_distance , 0.0)] ;
     if(direction == @"right")
         moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(step_distance , 0.0)] ;
-    [[self sprite] runAction: [CCSequence actions:moveAction ,[CCCallFuncN actionWithTarget: self selector:@selector(walkFinished)] , nil]];
+
+    [[self sprite] runAction: [CCSequence actions:moveAction ,[CCCallFuncN actionWithTarget: self selector:@selector(walkFinished)] , nil]]; 
 }
 
 - (void) walkFinished
@@ -94,6 +134,7 @@
 
 - (void) dealloc
 {
+    [backAnimations_ dealloc];
     [animations dealloc];
     [super dealloc];
 }

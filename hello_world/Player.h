@@ -14,6 +14,7 @@
 @interface Player : NSObject {
     CCSprite *sprite_;
     NSMutableDictionary *animations;
+    NSMutableDictionary *backAnimations_;
     int step_distance ;
     BOOL walking_;
 
@@ -26,5 +27,9 @@
 - (void) walk: (NSString *) direction;
 
 - (BOOL) walking;
+
+- (void) walk: (NSString *) direction back: (BOOL) back;
+
+- (void) setBackAnimation;
 
 @end
