@@ -182,7 +182,7 @@
     // not wall and not boxes  then return YES;
     return ![self isWallAtDirection:direction atPosition:playerPos] && !boxSprite;
 }
-
+//TODO box
 - (BOOL)playerPushAble:(NSString *)direction
 {
     CCSprite *boxSprite;
@@ -191,7 +191,13 @@
         if( [self isWallAtDirection:direction atPosition:boxSprite.position]){
             return NO;
         }else{
-            return YES;
+            CGPoint boxNextPos;
+            boxNextPos = [self nextStep: direction atPosition:boxSprite.position];
+            if ( [self boxAtMapXY:boxNextPos]){
+                return NO;
+            }else{
+                return YES;
+            }
         }
     }else{
         return NO;
@@ -200,8 +206,8 @@
 
 - (CCSprite *) boxByPlayer: (NSString *) direction
 {
-    CGPoint playerPos = [self playerSprite].position;
     CGPoint boxPos ;
+    CGPoint playerPos = [self playerSprite].position;
     if(direction == @"left")
         boxPos = ccp(playerPos.x - 32 , playerPos.y);
     if(direction == @"right")
@@ -209,16 +215,34 @@
     if(direction == @"down")
         boxPos = ccp(playerPos.x , playerPos.y - 32);
     if(direction == @"up")
-        boxPos = ccp(playerPos.x , playerPos.y + 32);
+        boxPos = ccp(playerPos.x , playerPos.y + 32);  
+    return [self boxAtPosition: boxPos];
+}
+
+- (CCSprite *) boxAtPosition: (CGPoint ) position
+{
     NSEnumerator *enumerator;
     enumerator = [_boxes objectEnumerator];
     CCSprite *box_sprite;
     while (box_sprite = [enumerator nextObject] ) {
-        if (CGPointEqualToPoint(boxPos , box_sprite.position)) {
+        if (CGPointEqualToPoint(box_sprite.position , position)) {
             return box_sprite;
         }
     }
     return nil;
+}
+
+- (CCSprite *) boxAtMapXY: (CGPoint) position
+{
+    NSEnumerator *enumerator;
+    enumerator = [_boxes objectEnumerator];
+    CCSprite *box_sprite;
+    while (box_sprite = [enumerator nextObject] ) {
+        if (CGPointEqualToPoint( [self toMapXY:box_sprite.position] , position)) {
+            return box_sprite;
+        }
+    }
+    return nil;  
 }
 
 - (CGPoint) nextStep: direction atPosition: (CGPoint) curPos
@@ -244,7 +268,7 @@
 {
     CGPoint pos =CGPointMake((position.x - 16) / 32, 9 - (position.y - 16)/32);  
     return pos;
-}
+}    
 
 - (BOOL) isWallAtDirection: (NSString *) direction atPosition: (CGPoint) curPos
 {

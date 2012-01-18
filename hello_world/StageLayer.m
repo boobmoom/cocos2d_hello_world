@@ -13,7 +13,7 @@
 
 + (int) totalStages
 {
-    return 3;
+    return 5;
 }
 
 + (CCScene *) scene

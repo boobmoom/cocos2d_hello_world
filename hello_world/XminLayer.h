@@ -52,11 +52,13 @@ enum {
 
 - (BOOL) isWallAtDirection: (NSString *) direction atPosition: (CGPoint) curPos;
 
-- (CGPoint) nextStep: direction atPosition: (CGPoint) curPos;
+- (CGPoint) nextStep: (NSString *)direction atPosition: (CGPoint) curPos;
 
 - (CCSprite *) playerSprite;
 
 - (CGPoint) toMapXY: (CGPoint) position;
+
+- (CCSprite *) boxAtPosition: (CGPoint ) position;
 
 - (void) checkWin;
 
@@ -75,6 +77,8 @@ enum {
 - (void) addController: (Controller *) ctr;
 
 - (void) addMenu;
+
+- (CCSprite *) boxAtMapXY: (CGPoint) position;
 
 -(void) mainMenu;
 
