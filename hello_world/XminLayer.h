@@ -19,6 +19,20 @@ enum {
 };
 @class Controller;
 
+@interface PushBoxStep : NSObject {
+    CGPoint playerStandPos_;
+    NSString *direction_;
+    BOOL boxPushed_;
+}
+
+@property (nonatomic , readonly) CGPoint playerStandPos;
+@property (nonatomic , readonly) NSString *direction;
+@property (nonatomic , readonly) BOOL boxPushed;
+
+- (id) initWithPlayerStandPos: (CGPoint) pos andDirection: (NSString *) direction boxPushed:(BOOL)pushed;
+
+@end
+
 @interface XminLayer : CCLayer {
     Player *player_;      
     CCTMXTiledMap *_tileMap;
@@ -26,11 +40,13 @@ enum {
     NSMutableArray *_boxes;
     Controller *controller_;
     NSNumber *stage_;
+    NSMutableArray *lastSteps_;
 }
 
 @property (nonatomic , assign , readwrite) Player *player;
 @property (nonatomic, retain) CCTMXTiledMap *tileMap;
 @property (nonatomic, retain) CCTMXLayer *background;
+@property (nonatomic, readonly) NSMutableArray *lastSteps;
 
 + (CCScene *) sceneWithStage: (int) stage;
 
@@ -63,4 +79,6 @@ enum {
 -(void) mainMenu;
 
 - (id) initWithStage: (int) stage;
+
+- (void) cancelStep;
 @end

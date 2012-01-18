@@ -28,5 +28,7 @@
 + (id) controlWithGameLayer: (XminLayer *) layer;
 
 - (void) command: (NSString *) com;
+
+-(void) cancelStep;
     
 @end

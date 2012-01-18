@@ -128,6 +128,7 @@
 		54702CA314C0293E00B6D1DC /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = 54702CA214C0293E00B6D1DC /* Controller.m */; };
 		5479361714B6E38500C1BB41 /* sprite.png in Resources */ = {isa = PBXBuildFile; fileRef = 5479361614B6E38500C1BB41 /* sprite.png */; };
 		54793F2214BBD3A30064D312 /* tmw_desert_spacing.png in Resources */ = {isa = PBXBuildFile; fileRef = 54793F2114BBD3A30064D312 /* tmw_desert_spacing.png */; };
+		5492A5D114C669E6007CE58F /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 5492A5D014C669E6007CE58F /* cancel.png */; };
 		549573DD14B5529400DFE169 /* XminLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 549573DC14B5529400DFE169 /* XminLayer.m */; };
 		549573E614B5532000DFE169 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 549573E514B5532000DFE169 /* Player.m */; };
 		54C0DC3714B3EAB100151A7F /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 54C0DC3614B3EAB100151A7F /* down.png */; };
@@ -378,6 +379,7 @@
 		54702CA214C0293E00B6D1DC /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
 		5479361614B6E38500C1BB41 /* sprite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sprite.png; sourceTree = "<group>"; };
 		54793F2114BBD3A30064D312 /* tmw_desert_spacing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tmw_desert_spacing.png; sourceTree = "<group>"; };
+		5492A5D014C669E6007CE58F /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
 		549573DB14B5529300DFE169 /* XminLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XminLayer.h; sourceTree = "<group>"; };
 		549573DC14B5529400DFE169 /* XminLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XminLayer.m; sourceTree = "<group>"; };
 		549573E414B5531F00DFE169 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 		540033DD14AEDEC900384EAC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5492A5D014C669E6007CE58F /* cancel.png */,
 				546E1A7714C4157D00C73A25 /* boxes2.tmx */,
 				54702C9F14C01F1800B6D1DC /* boxes1.tmx */,
 				54F9DC6314BE7118007FB44A /* boxes3.tmx */,
@@ -858,6 +861,7 @@
 				54F9DC6414BE7118007FB44A /* boxes3.tmx in Resources */,
 				54702CA014C01F1800B6D1DC /* boxes1.tmx in Resources */,
 				546E1A7814C4157D00C73A25 /* boxes2.tmx in Resources */,
+				5492A5D114C669E6007CE58F /* cancel.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

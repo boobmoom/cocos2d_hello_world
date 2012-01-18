@@ -8,6 +8,30 @@
 
 #import "XminLayer.h"
 
+@implementation PushBoxStep
+
+@synthesize playerStandPos = playerStandPos_;
+@synthesize direction = direction_;
+@synthesize boxPushed = boxPushed_;
+
+- (id) initWithPlayerStandPos:(CGPoint)pos andDirection:(NSString *)direction boxPushed:(BOOL)pushed
+{
+    if (self = [super init]) {
+        playerStandPos_ = pos;
+        direction_ = direction;
+        boxPushed_ = pushed;
+    }  
+    return self;
+}
+
+- (void) dealloc
+{
+    [direction_ dealloc];
+    [super dealloc];
+}
+
+@end
+
 
 
 @implementation XminLayer
@@ -15,6 +39,7 @@
 @synthesize player = player_;
 @synthesize tileMap = _tileMap;
 @synthesize background = _background;
+@synthesize lastSteps = lastSteps_;
 
 + (CCScene *) sceneWithStage: (int) stage
 {
@@ -29,6 +54,47 @@
 - (BOOL) lastCommandExecuting
 {
     return [[self player] walking];
+}
+
+
+- (void) cancelStep
+{
+    PushBoxStep *step;
+    step = [lastSteps_ objectAtIndex:0];
+    NSString *direction;
+    if ([step direction] == @"down"){
+        direction  = @"up";
+    }
+    if ([step direction] == @"up"){
+        direction  = @"down";
+    }
+    if ([step direction] == @"left"){
+        direction  = @"right";
+    }
+    if ([step direction] == @"right"){
+        direction  = @"left";
+    }
+    if ([step boxPushed]){
+        [[self player] walk:direction];     
+        int step_distance = _tileMap.tileSize.width;
+        CCSprite *boxSprite = [self boxByPlayer:[step direction]];
+        CCMoveBy *moveAction;
+        if(direction == @"down")
+            moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(0.0, -step_distance)] ;
+        if(direction == @"up")
+            moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(0.0, step_distance)] ;
+        if(direction == @"left")
+            moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(-step_distance , 0.0)] ;
+        if(direction == @"right")
+            moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(step_distance , 0.0)] ;
+        [boxSprite runAction: moveAction];
+        
+    }else{
+        [[self player] walk:direction];        
+    }
+    [lastSteps_ removeObjectAtIndex:0];
+    [lastSteps_ addObject:@"nil"];
+    
 }
 
 
@@ -79,6 +145,10 @@
 - (void) playerMove:(NSString *)direction
 {
     [[self player] walk:direction];
+    PushBoxStep *step;
+    step = [[[PushBoxStep alloc] initWithPlayerStandPos:[self playerSprite].position andDirection: direction boxPushed:NO] autorelease];
+    [lastSteps_ removeObjectAtIndex:2];
+    [lastSteps_ insertObject:step atIndex:0];
 }
 
 - (void) playerPush:(NSString *)direction
@@ -98,6 +168,10 @@
         moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(step_distance , 0.0)] ;
     checkWin = [CCCallFunc actionWithTarget:self selector:@selector(checkWin)];
     [boxSprite runAction: [CCSequence actions:moveAction, checkWin , nil]];
+    PushBoxStep *step;
+    step = [[[PushBoxStep alloc] initWithPlayerStandPos:[self playerSprite].position andDirection: direction boxPushed:YES] autorelease];
+    [lastSteps_ removeObjectAtIndex:2];
+    [lastSteps_ insertObject:step atIndex:0];
 }
 
 
@@ -229,6 +303,11 @@
             [_boxes addObject:box_sprite];
         }
         [self addMenu];
+        //init lastSteps_
+        lastSteps_ = [[NSMutableArray alloc] initWithCapacity:3];
+        [lastSteps_ addObject:@"nil"];
+        [lastSteps_ addObject:@"nil"];
+        [lastSteps_ addObject:@"nil"];
     }
     return self;
 }
@@ -260,6 +339,7 @@
 - (void) dealloc
 {
     [stage_ dealloc];
+    [lastSteps_ dealloc];
     [_boxes dealloc];
     [player_ dealloc];
     [controller_ dealloc];

@@ -64,15 +64,32 @@
     upItem.rotation = 180;
     upItem.position = CGPointMake(40+20, 80+20);
     
-    CCMenu *control_layer = [CCMenu menuWithItems: downItem , rightItem , leftItem , upItem ,nil];
+    CCSprite *cacelButtonSprite = [CCSprite spriteWithFile:@"cancel.png"];
+    CCSprite *cacelButtonSpritePressed = [CCSprite spriteWithFile:@"cancel.png"];
+    CCMenuItemSprite *cacelMenuItem = [CCMenuItemSprite itemFromNormalSprite: cacelButtonSprite selectedSprite:cacelButtonSpritePressed target: self selector: @selector(cancelStep)];
+    cacelMenuItem.position = CGPointMake(50, 140);
+
+    cacelMenuItem.scale = 0.6;
     
-    control_layer.contentSize = CGSizeMake(120, 120);
+
+    
+    
+    CCMenu *control_layer = [CCMenu menuWithItems: downItem , rightItem , leftItem , upItem , cacelMenuItem ,nil];
+    
+    control_layer.contentSize = CGSizeMake(200 , 200);
     CGSize win_size = [[CCDirector sharedDirector] winSize];
     control_layer.position = CGPointMake(win_size.width - 120 ,0);
     control_layer.scale = 0.6;
     [self setLayer:control_layer];
 }
 
+
+-(void) cancelStep
+{
+    if ([gameLayer_ lastCommandExecuting]) return;
+    if ([[gameLayer_ lastSteps] objectAtIndex:0] == @"nil") return;
+    [gameLayer_ cancelStep];
+}
 
 
 -(void) walkDown
