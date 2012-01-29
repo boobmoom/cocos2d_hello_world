@@ -306,8 +306,8 @@
 - (id) initWithStage: (int) stage
 {
     stage_ =  [NSNumber numberWithInt:stage] ;
-    [[self init] autorelease];
-    return self;
+    [stage_ retain];
+    return [[self init] autorelease];
 }
 
 
@@ -380,7 +380,7 @@
 
 - (void) dealloc
 {
-    [stage_ dealloc];
+    [stage_ release];
     [lastSteps_ dealloc];
     [_boxes dealloc];
     [player_ dealloc];
