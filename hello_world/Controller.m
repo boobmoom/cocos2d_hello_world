@@ -64,25 +64,20 @@
     upItem.rotation = 180;
     upItem.position = CGPointMake(40+20, 80+20);
     
-//    CCSprite *cacelButtonSprite = [CCSprite spriteWithFile:@"cancel.png"];
-//    CCSprite *cacelButtonSpritePressed = [CCSprite spriteWithFile:@"cancel.png"];
-//    CCMenuItemSprite *cacelMenuItem = [CCMenuItemSprite itemFromNormalSprite: cacelButtonSprite selectedSprite:cacelButtonSpritePressed target: self selector: @selector(cancelStep)];
-//    cacelMenuItem.position = CGPointMake(50, 140);
-////    CCLabelTTF *cancelItemLabel = [CCLabelTTF labelWithString:@"悔步" fontName:@"Marker Felt" fontSize:20];
-////    cancelItemLabel.position = ccp(10 , 10);
-////    [cacelMenuItem addChild:cancelItemLabel z:100];
-//    cacelMenuItem.scale = 0.6;
-
-//怎样把悔步用图片按钮替代呢？同时可以指示，是否可以按。    
-    CCLabelTTF *cancelItemLabel = [CCLabelTTF labelWithString:@"悔步" fontName:@"Marker Felt" fontSize:30];
-    CCMenuItemLabel *cancelItem = [CCMenuItemLabel itemWithLabel:cancelItemLabel  target:self selector:@selector(cancelStep)];
-    cancelItem.position = CGPointMake(50, 160);
-
+    CCSprite *cacelButtonSprite = [CCSprite spriteWithFile:@"cancel.png"];
+    CCSprite *cacelButtonSpritePressed = [CCSprite spriteWithFile:@"cancel.png"];
+    CCMenuItemSprite *cacelMenuItem = [CCMenuItemSprite itemFromNormalSprite: cacelButtonSprite selectedSprite:cacelButtonSpritePressed target: self selector: @selector(cancelStep)];
+    cacelMenuItem.position = CGPointMake(50, 140);
+    cacelMenuItem.scale = 0.6;
+    CCLabelTTF *cancelItemLabel = [CCLabelTTF labelWithString:@"悔步" fontName:@"Marker Felt" fontSize:40];
+    CGSize c_s = cacelMenuItem.contentSize;
+    cancelItemLabel.position = ccp(c_s.width/2 , c_s.height/2);
+    [cacelMenuItem addChild:cancelItemLabel z:100];
     
 
     
     
-    CCMenu *control_layer = [CCMenu menuWithItems: downItem , rightItem , leftItem , upItem , cancelItem ,nil];
+    CCMenu *control_layer = [CCMenu menuWithItems: downItem , rightItem , leftItem , upItem , cacelMenuItem ,nil];
     
     control_layer.contentSize = CGSizeMake(200 , 200);
     CGSize win_size = [[CCDirector sharedDirector] winSize];
