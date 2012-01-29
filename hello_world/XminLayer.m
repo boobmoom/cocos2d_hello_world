@@ -87,7 +87,9 @@
             moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(-step_distance , 0.0)] ;
         if(direction == @"right")
             moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(step_distance , 0.0)] ;
-        [boxSprite runAction: moveAction];
+        CCCallFuncN *setBoxOpacity;
+        setBoxOpacity = [CCCallFuncN actionWithTarget:self selector:@selector(setBoxOpacity:)];
+        [boxSprite runAction: [CCSequence actions:moveAction , setBoxOpacity , nil]];
         
     }else{
         [[self player] walk:direction back:YES];
@@ -157,7 +159,8 @@
     CCSprite *boxSprite = [self boxByPlayer:direction];
     [[self player] walk:direction];
     CCMoveBy *moveAction;
-    CCCallFunc *checkWin;
+    CCCallFunc *checkWin ;
+    CCCallFuncN *setBoxOpacity;
     if(direction == @"down")
         moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(0.0, -step_distance)] ;
     if(direction == @"up")
@@ -167,13 +170,28 @@
     if(direction == @"right")
         moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(step_distance , 0.0)] ;
     checkWin = [CCCallFunc actionWithTarget:self selector:@selector(checkWin)];
-    [boxSprite runAction: [CCSequence actions:moveAction, checkWin , nil]];
+    setBoxOpacity = [CCCallFuncN actionWithTarget:self selector:@selector(setBoxOpacity:)];
+    [boxSprite runAction: [CCSequence actions:moveAction, checkWin ,setBoxOpacity , nil]];
     PushBoxStep *step;
     step = [[[PushBoxStep alloc] initWithPlayerStandPos:[self playerSprite].position andDirection: direction boxPushed:YES] autorelease];
     [lastSteps_ removeObjectAtIndex:2];
     [lastSteps_ insertObject:step atIndex:0];
 }
 
+
+- (void) setBoxOpacity: (id) sender
+{
+    CGPoint mapPos = [self toMapXY: [(CCSprite *)sender position]];
+
+    int tilGid = [_background tileGIDAt: mapPos];
+    NSDictionary *properties = [_tileMap propertiesForGID:tilGid];
+    NSString *des = [properties valueForKey:@"des"];
+    if (des && [des compare:@"true"] == NSOrderedSame) {
+        [(CCSprite *)sender setOpacity: 180];
+    }else{
+        [(CCSprite *)sender setOpacity: 255];
+    }
+}
 
 - (BOOL) playerMoveAble: (NSString *) direction
 {

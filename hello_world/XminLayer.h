@@ -78,6 +78,8 @@ enum {
 
 - (void) addMenu;
 
+- (void) setBoxOpacity: (id) sender;
+
 - (CCSprite *) boxAtMapXY: (CGPoint) position;
 
 -(void) mainMenu;
