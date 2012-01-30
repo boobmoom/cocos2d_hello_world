@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "hello_world/XminLayer.h"
-         timestampString = "349527254.295381"
+         timestampString = "349601265.773978"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "45"
-         endingLineNumber = "45"
+         startingLineNumber = "35"
+         endingLineNumber = "35"
          landmarkName = "@interface XminLayer"
          landmarkType = "2">
       </FileBreakpoint>
@@ -51,11 +51,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "hello_world/XminLayer.m"
-         timestampString = "349588466.995388"
+         timestampString = "349601265.773978"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "36"
-         endingLineNumber = "36"
+         startingLineNumber = "15"
+         endingLineNumber = "15"
          landmarkName = "@implementation XminLayer"
          landmarkType = "3">
          <Locations>

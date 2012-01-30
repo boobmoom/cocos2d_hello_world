@@ -12,6 +12,8 @@
 #import "Controller.h"
 #import "BoxMenu.h"
 #import "Direction.h"
+#import "PushBoxStep.h"
+#import "BoxItem.h"
 
 
 enum {
@@ -19,20 +21,8 @@ enum {
     kTagForBackground
 };
 @class Controller;
+@class BoxItem;
 
-@interface PushBoxStep : NSObject {
-    CGPoint playerStandPos_;
-    Direction *direction_;
-    BOOL boxPushed_;
-}
-
-@property (nonatomic , readonly) CGPoint playerStandPos;
-@property (nonatomic , readonly) Direction *direction;
-@property (nonatomic , readonly) BOOL boxPushed;
-
-- (id) initWithPlayerStandPos: (CGPoint) pos andDirection: (Direction *) direction boxPushed:(BOOL)pushed;
-
-@end
 
 @interface XminLayer : CCLayer {
     Player *player_;      
@@ -53,17 +43,15 @@ enum {
 
 - (BOOL) isWallAtDirection: (Direction *) direction atPosition: (CGPoint) curPos;
 
-- (CGPoint) nextStep: (Direction *)direction atPosition: (CGPoint) curPos;
-
 - (CCSprite *) playerSprite;
 
 - (CGPoint) toMapXY: (CGPoint) position;
 
-- (CCSprite *) boxAtPosition: (CGPoint ) position;
+- (BoxItem *) boxAtPosition: (CGPoint ) position;
 
 - (void) checkWin;
 
-- (CCSprite *) boxByPlayer: (Direction *) direction;
+- (BoxItem *) boxByPlayer: (Direction *) direction;
 
 - (BOOL) playerMoveAble: (Direction *) direction;
 
@@ -73,6 +61,10 @@ enum {
 
 - (void) playerPush: (Direction *) direction;
 
+- (CGPoint) positionOfDirection:(Direction *) direction ofCurrentPos:(CGPoint) curPos;
+
+- (CGPoint) positionOfDirection:(Direction *) direction ofCurrentPos:(CGPoint) curPos step:(int) step;
+
 - (BOOL) lastCommandExecuting;
 
 - (void) addController: (Controller *) ctr;
@@ -80,8 +72,6 @@ enum {
 - (void) addMenu;
 
 - (void) setBoxOpacity: (id) sender;
-
-- (CCSprite *) boxAtMapXY: (CGPoint) position;
 
 -(void) mainMenu;
 

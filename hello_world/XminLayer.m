@@ -8,30 +8,9 @@
 
 #import "XminLayer.h"
 
-@implementation PushBoxStep
-
-@synthesize playerStandPos = playerStandPos_;
-@synthesize direction = direction_;
-@synthesize boxPushed = boxPushed_;
-
-- (id) initWithPlayerStandPos:(CGPoint)pos andDirection:(Direction *)direction boxPushed:(BOOL)pushed
-{
-    if (self = [super init]) {
-        playerStandPos_ = pos;
-        direction_ = direction;
-        boxPushed_ = pushed;
-    }  
-    return self;
-}
-
-- (void) dealloc
-{
-    [super dealloc];
-}
-
+@interface XminLayer (Private)
+    - (NSDictionary *) propertiesAtPosition: (CGPoint) position;
 @end
-
-
 
 @implementation XminLayer
 
@@ -50,12 +29,13 @@
     return scene;
 }
 
+//之前的动作是否执行完成
 - (BOOL) lastCommandExecuting
 {
     return [[self player] walking];
 }
 
-
+//悔步
 - (void) cancelStep
 {
     PushBoxStep *step;
@@ -64,13 +44,8 @@
     direction = [step direction];
     if ([step boxPushed]){
         [[self player] walk:[direction oppositDirection] back:YES];
-        CCSprite *boxSprite = [self boxByPlayer:direction];
-        CCMoveBy *moveAction;
-        moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(-direction.stepSize.width, -direction.stepSize.height)] ;
-        CCCallFuncN *setBoxOpacity;
-        setBoxOpacity = [CCCallFuncN actionWithTarget:self selector:@selector(setBoxOpacity:)];
-        [boxSprite runAction: [CCSequence actions:moveAction , setBoxOpacity , nil]];
-        
+        BoxItem *boxItem = [self boxByPlayer:direction];
+        [boxItem move:[direction oppositDirection] withTarget:self];        
     }else{
         [[self player] walk:[direction oppositDirection] back:YES];
     }
@@ -79,8 +54,7 @@
     
 }
 
-
-
+//TODO 这里为什么会用到player sprite 不太符合常理
 - (CCSprite *) playerSprite
 {
     return [[self player] sprite];
@@ -89,21 +63,17 @@
 - (void) checkWin
 {
     NSEnumerator *enumerator = [_boxes objectEnumerator];
-    CCSprite *box_sprite;
+    BoxItem *boxItem;
     int s = 0;
-    CGPoint mapPos;
-    while ( box_sprite = [enumerator nextObject]) {
-        mapPos = [self toMapXY:box_sprite.position];
-        int tilGid = [_background tileGIDAt: mapPos];
-        NSDictionary *properties = [_tileMap propertiesForGID:tilGid];
+    while ( boxItem = [enumerator nextObject]) {
+        NSDictionary *properties  = [self propertiesAtPosition: boxItem.position];
         NSString *des = [properties valueForKey:@"des"];
         if (des && [des compare:@"true"] == NSOrderedSame) {
             s+= 1;
         }
     }
-    
     if (s == [_boxes count]){
-
+        //进入下一关
         CCScene *nextScene;
         if([stage_ intValue] < [StageLayer totalStages]){
             nextScene = [XminLayer sceneWithStage: ([stage_ intValue] + 1)];
@@ -116,10 +86,7 @@
             [winLayer addChild:label];
             [nextScene addChild: winLayer];
         }
-        CCTransitionFlipX *transitionScene = [CCTransitionFlipX transitionWithDuration:0.6 scene:nextScene orientation:kOrientationRightOver];
-//        CCActionInterval *rightSlideSceneAction;
-
-        
+        CCTransitionFlipX *transitionScene = [CCTransitionFlipX transitionWithDuration:0.6 scene:nextScene orientation:kOrientationRightOver];        
         [[CCDirector sharedDirector] replaceScene:transitionScene];
     }
 }
@@ -127,25 +94,17 @@
 - (void) playerMove:(Direction *)direction
 {
     [[self player] walk:direction];
-    PushBoxStep *step;
-    step = [[[PushBoxStep alloc] initWithPlayerStandPos:[self playerSprite].position andDirection: direction boxPushed:NO] autorelease];
+    PushBoxStep *step = [[[PushBoxStep alloc] initWithPlayerStandPos:[self playerSprite].position andDirection: direction boxPushed:NO] autorelease];
     [lastSteps_ removeObjectAtIndex:2];
     [lastSteps_ insertObject:step atIndex:0];
 }
 
 - (void) playerPush:(Direction *)direction
 {
-    CCSprite *boxSprite = [self boxByPlayer:direction];
+    BoxItem *boxItem = [self boxByPlayer:direction];
     [[self player] walk:direction];
-    CCMoveBy *moveAction;
-    CCCallFunc *checkWin ;
-    CCCallFuncN *setBoxOpacity;
-    moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(direction.stepSize.width,direction.stepSize.height)] ;
-    checkWin = [CCCallFunc actionWithTarget:self selector:@selector(checkWin)];
-    setBoxOpacity = [CCCallFuncN actionWithTarget:self selector:@selector(setBoxOpacity:)];
-    [boxSprite runAction: [CCSequence actions:moveAction, checkWin ,setBoxOpacity , nil]];
-    PushBoxStep *step;
-    step = [[[PushBoxStep alloc] initWithPlayerStandPos:[self playerSprite].position andDirection: direction boxPushed:YES] autorelease];
+    [boxItem move:direction withTarget:self];
+    PushBoxStep *step = [[[PushBoxStep alloc] initWithPlayerStandPos:[self playerSprite].position andDirection: direction boxPushed:YES] autorelease];
     [lastSteps_ removeObjectAtIndex:2];
     [lastSteps_ insertObject:step atIndex:0];
 }
@@ -153,10 +112,7 @@
 
 - (void) setBoxOpacity: (id) sender
 {
-    CGPoint mapPos = [self toMapXY: [(CCSprite *)sender position]];
-
-    int tilGid = [_background tileGIDAt: mapPos];
-    NSDictionary *properties = [_tileMap propertiesForGID:tilGid];
+    NSDictionary *properties = [self propertiesAtPosition:[(CCSprite *)sender position]];
     NSString *des = [properties valueForKey:@"des"];
     if (des && [des compare:@"true"] == NSOrderedSame) {
         [(CCSprite *)sender setOpacity: 180];
@@ -168,73 +124,45 @@
 - (BOOL) playerMoveAble: (Direction *) direction
 {
     CGPoint playerPos = [self playerSprite].position;
-    CCSprite *boxSprite = [self boxByPlayer:direction];
-    // not wall and not boxes  then return YES;
-    CCLOG(@"PlayerMoveAble at direction %@ isWall %d , isBox %d" , [direction directionStr] ,[self isWallAtDirection:direction atPosition:playerPos] ,  !!boxSprite);
-    return ![self isWallAtDirection:direction atPosition:playerPos] && !boxSprite;
+    BoxItem *boxItem = [self boxByPlayer:direction];
+    CCLOG(@"PlayerMoveAble at direction %@ isWall %d , isBox %d" , [direction directionStr] ,[self isWallAtDirection:direction atPosition:playerPos] ,  !!boxItem);
+    return ![self isWallAtDirection:direction atPosition:playerPos] && !boxItem;
 }
-//TODO box
+//TODO refactor
 - (BOOL)playerPushAble:(Direction *)direction
 {
-    CCSprite *boxSprite;
-    boxSprite = [self boxByPlayer:direction];
-    if(boxSprite){        
-        if( [self isWallAtDirection:direction atPosition:boxSprite.position]){
+    BoxItem *boxItem = [self boxByPlayer:direction];
+    if(boxItem){        
+        if( [self isWallAtDirection:direction atPosition:boxItem.position]){
             return NO;
         }else{
-            CGPoint boxNextPos;
-            boxNextPos = [self nextStep: direction atPosition:boxSprite.position];
-            if ( [self boxAtMapXY:boxNextPos]){
-                return NO;
-            }else{
-                return YES;
-            }
+            CGPoint nextByBoxPos;
+            nextByBoxPos = [self positionOfDirection:direction ofCurrentPos:[self playerSprite].position step:2];
+            if ([self boxAtPosition: nextByBoxPos]){return NO;}
+            return YES;
         }
-    }else{
-        return NO;
     }
+    return NO;
 }
 
-- (CCSprite *) boxByPlayer: (Direction *) direction
+- (BoxItem *) boxByPlayer: (Direction *) direction
 {
-    CGPoint boxPos ;
     CGPoint playerPos = [self playerSprite].position;
-    boxPos = ccp(playerPos.x + direction.stepSize.width , playerPos.y + direction.stepSize.height);
+    CGPoint boxPos = ccp(playerPos.x + direction.stepSize.width , playerPos.y + direction.stepSize.height);
     return [self boxAtPosition: boxPos];
 }
 
-- (CCSprite *) boxAtPosition: (CGPoint ) position
+- (BoxItem *) boxAtPosition: (CGPoint ) position
 {
     NSEnumerator *enumerator;
     enumerator = [_boxes objectEnumerator];
-    CCSprite *box_sprite;
-    while (box_sprite = [enumerator nextObject] ) {
-        if (CGPointEqualToPoint(box_sprite.position , position)) {
-            return box_sprite;
+    BoxItem *boxItem;
+    while (boxItem = [enumerator nextObject] ) {
+        if (CGPointEqualToPoint([boxItem position] , position)) {
+            return boxItem;
         }
     }
     return nil;
-}
-
-- (CCSprite *) boxAtMapXY: (CGPoint) position
-{
-    NSEnumerator *enumerator;
-    enumerator = [_boxes objectEnumerator];
-    CCSprite *box_sprite;
-    while (box_sprite = [enumerator nextObject] ) {
-        if (CGPointEqualToPoint( [self toMapXY:box_sprite.position] , position)) {
-            return box_sprite;
-        }
-    }
-    return nil;  
-}
-
-- (CGPoint) nextStep: (Direction *)direction atPosition: (CGPoint) curPos
-{
-    CGPoint curTiledPos = [self toMapXY: curPos];
-    CGPoint nextStep;
-    nextStep = CGPointMake(curTiledPos.x + direction.tileStep.x, curTiledPos.y + direction.tileStep.y);
-    return nextStep;
 }
 
 - (CGPoint) toMapXY: (CGPoint) position
@@ -243,18 +171,31 @@
     return pos;
 }    
 
+- (CGPoint) positionOfDirection:(Direction *) direction ofCurrentPos:(CGPoint) curPos
+{
+    return [self positionOfDirection:direction ofCurrentPos:curPos step: 1];
+}
+
+- (CGPoint) positionOfDirection:(Direction *) direction ofCurrentPos:(CGPoint) curPos step:(int) step
+{
+    return ccp( curPos.x + direction.stepSize.width * step , curPos.y + direction.stepSize.height * step);
+}
+
+- (NSDictionary *) propertiesAtPosition: (CGPoint) position
+{
+    CGPoint mapXY = [self toMapXY:position];
+    int tilGid = [_background tileGIDAt:mapXY];
+    NSDictionary *properties = [_tileMap propertiesForGID:tilGid];
+    return properties;
+}
+
 - (BOOL) isWallAtDirection: (Direction *) direction atPosition: (CGPoint) curPos
 {
-    CGPoint nextStep = [self nextStep: direction atPosition: curPos];
-    int tilGid = [_background tileGIDAt: nextStep];
-    NSDictionary *properties = [_tileMap propertiesForGID:tilGid];
+    CGPoint thePosition = [self positionOfDirection:direction ofCurrentPos:curPos];
+    NSDictionary *properties = [self propertiesAtPosition: thePosition];
     NSString *collision = [properties valueForKey:@"collidable"];
-    if (collision && [collision compare:@"true"] == NSOrderedSame) {
-        return YES;
-    }else{
-        return NO;
-    }
-    
+    if (collision && [collision compare:@"true"] == NSOrderedSame) return YES;
+    return NO;
 };
 
 
@@ -287,17 +228,16 @@
         //add box
         int i ;
         _boxes = [[NSMutableArray alloc] initWithCapacity:10];
+        //遍历初使化箱子
         for (i = 1 ; i<= 10; i++) {
-            CCSprite *box_sprite = [CCSprite spriteWithFile:@"tmw_desert_spacing.png" rect:CGRectMake(6*32 + 7, 3*32 + 4, 32, 32)];
+            BoxItem *box;
             NSMutableDictionary *boxPoint = [objects objectNamed:[NSString stringWithFormat:@"box%i" , i]];
-            if (boxPoint == nil) {
-                break;
-            }
+            if (boxPoint == nil) {break;}
             x = [[boxPoint valueForKey:@"x"] intValue];
             y = [[boxPoint valueForKey:@"y"] intValue];
-            box_sprite.position = CGPointMake(x+16 , y+16);
-            [self addChild: box_sprite];
-            [_boxes addObject:box_sprite];
+            box = [BoxItem initializeWithPosition:CGPointMake(x+16 , y+16)];
+            [self addChild: [box sprite]];
+            [_boxes addObject:box];
         }
         [self addMenu];
         //init lastSteps_
@@ -312,7 +252,6 @@
 
 - (void) addMenu
 {
-    
     CCLabelTTF *mainMenu = [CCLabelTTF labelWithString:@"主菜单" fontName:@"Marker Felt" fontSize:30];
     CCMenuItemLabel *mainMenuLabel = [CCMenuItemLabel itemWithLabel:mainMenu  target:self selector:@selector(mainMenu)];
     CCMenu *menu = [CCMenu menuWithItems:mainMenuLabel,nil];
