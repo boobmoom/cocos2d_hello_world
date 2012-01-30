@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "XminLayer.h"
+#import "Direction.h"
+
 @class XminLayer;
 
 @interface Controller : NSObject
@@ -27,7 +29,7 @@
 
 + (id) controlWithGameLayer: (XminLayer *) layer;
 
-- (void) command: (NSString *) com;
+- (void) command: (Direction *) com;
 
 -(void) cancelStep;
     

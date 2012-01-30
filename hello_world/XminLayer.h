@@ -11,6 +11,7 @@
 #import "Player.h"
 #import "Controller.h"
 #import "BoxMenu.h"
+#import "Direction.h"
 
 
 enum {
@@ -21,15 +22,15 @@ enum {
 
 @interface PushBoxStep : NSObject {
     CGPoint playerStandPos_;
-    NSString *direction_;
+    Direction *direction_;
     BOOL boxPushed_;
 }
 
 @property (nonatomic , readonly) CGPoint playerStandPos;
-@property (nonatomic , readonly) NSString *direction;
+@property (nonatomic , readonly) Direction *direction;
 @property (nonatomic , readonly) BOOL boxPushed;
 
-- (id) initWithPlayerStandPos: (CGPoint) pos andDirection: (NSString *) direction boxPushed:(BOOL)pushed;
+- (id) initWithPlayerStandPos: (CGPoint) pos andDirection: (Direction *) direction boxPushed:(BOOL)pushed;
 
 @end
 
@@ -50,9 +51,9 @@ enum {
 
 + (CCScene *) sceneWithStage: (int) stage;
 
-- (BOOL) isWallAtDirection: (NSString *) direction atPosition: (CGPoint) curPos;
+- (BOOL) isWallAtDirection: (Direction *) direction atPosition: (CGPoint) curPos;
 
-- (CGPoint) nextStep: (NSString *)direction atPosition: (CGPoint) curPos;
+- (CGPoint) nextStep: (Direction *)direction atPosition: (CGPoint) curPos;
 
 - (CCSprite *) playerSprite;
 
@@ -62,15 +63,15 @@ enum {
 
 - (void) checkWin;
 
-- (CCSprite *) boxByPlayer: (NSString *) direction;
+- (CCSprite *) boxByPlayer: (Direction *) direction;
 
-- (BOOL) playerMoveAble: (NSString *) direction;
+- (BOOL) playerMoveAble: (Direction *) direction;
 
-- (BOOL) playerPushAble: (NSString *) direction;
+- (BOOL) playerPushAble: (Direction *) direction;
 
-- (void) playerMove: (NSString *) direction;
+- (void) playerMove: (Direction *) direction;
 
-- (void) playerPush: (NSString *) direction;
+- (void) playerPush: (Direction *) direction;
 
 - (BOOL) lastCommandExecuting;
 

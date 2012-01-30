@@ -94,12 +94,12 @@
     [animations setValue:walk_down_animation forKey: @"down"];
 }
 
-- (void) walk: (NSString *) direction
+- (void) walk: (Direction *) direction
 {
     [self walk:direction back:NO];
 }
 
-- (void) walk: (NSString *) direction back: (BOOL) back
+- (void) walk: (Direction *) direction back: (BOOL) back
 {
     if (walking_) {
         return;
@@ -107,22 +107,15 @@
     walking_ = YES;
     CCAnimation *animation;
     if(back){
-        animation = [backAnimations_ valueForKey: direction];
+        animation = [backAnimations_ valueForKey: direction.directionStr];
     }else{
-        animation = [animations valueForKey: direction];
+        animation = [animations valueForKey: direction.directionStr];
     }
     NSAssert( animation!=nil, @"Animate: argument Animation must be non-nil");
     [[self sprite] runAction:[CCAnimate actionWithDuration:0.3 animation: animation restoreOriginalFrame:NO] ];
     CCMoveBy *moveAction;
-    if(direction == @"down")
-        moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(0.0, -step_distance)] ;
-    if(direction == @"up")
-        moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(0.0, step_distance)] ;
-    if(direction == @"left")
-        moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(-step_distance , 0.0)] ;
-    if(direction == @"right")
-        moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(step_distance , 0.0)] ;
-
+    CCLOG(@"walk %f %f" , direction.stepSize.width , direction.stepSize.height);
+    moveAction = [CCMoveBy actionWithDuration:0.3 position: ccp(direction.stepSize.width , direction.stepSize.height)] ;
     [[self sprite] runAction: [CCSequence actions:moveAction ,[CCCallFuncN actionWithTarget: self selector:@selector(walkFinished)] , nil]]; 
 }
 

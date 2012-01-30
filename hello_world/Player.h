@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "Direction.h"
 
 
 
@@ -24,11 +25,11 @@
 
 - (void) setWalkAnimation;
 
-- (void) walk: (NSString *) direction;
+- (void) walk: (Direction *) direction;
 
 - (BOOL) walking;
 
-- (void) walk: (NSString *) direction back: (BOOL) back;
+- (void) walk: (Direction *) direction back: (BOOL) back;
 
 - (void) setBackAnimation;
 

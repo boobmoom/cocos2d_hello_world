@@ -14,7 +14,7 @@
 @synthesize direction = direction_;
 @synthesize boxPushed = boxPushed_;
 
-- (id) initWithPlayerStandPos:(CGPoint)pos andDirection:(NSString *)direction boxPushed:(BOOL)pushed
+- (id) initWithPlayerStandPos:(CGPoint)pos andDirection:(Direction *)direction boxPushed:(BOOL)pushed
 {
     if (self = [super init]) {
         playerStandPos_ = pos;
@@ -26,7 +26,6 @@
 
 - (void) dealloc
 {
-    [direction_ dealloc];
     [super dealloc];
 }
 
@@ -61,32 +60,13 @@
 {
     PushBoxStep *step;
     step = [lastSteps_ objectAtIndex:0];
-    NSString *direction;
-    if ([step direction] == @"down"){
-        direction  = @"up";
-    }
-    if ([step direction] == @"up"){
-        direction  = @"down";
-    }
-    if ([step direction] == @"left"){
-        direction  = @"right";
-    }
-    if ([step direction] == @"right"){
-        direction  = @"left";
-    }
+    Direction *direction;
+    direction = [step direction];
     if ([step boxPushed]){
-        [[self player] walk:direction back:YES];
-        int step_distance = _tileMap.tileSize.width;
-        CCSprite *boxSprite = [self boxByPlayer:[step direction]];
+        [[self player] walk:[direction oppositDirection] back:YES];
+        CCSprite *boxSprite = [self boxByPlayer:direction];
         CCMoveBy *moveAction;
-        if(direction == @"down")
-            moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(0.0, -step_distance)] ;
-        if(direction == @"up")
-            moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(0.0, step_distance)] ;
-        if(direction == @"left")
-            moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(-step_distance , 0.0)] ;
-        if(direction == @"right")
-            moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(step_distance , 0.0)] ;
+        moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(-direction.stepSize.width, -direction.stepSize.height)] ;
         CCCallFuncN *setBoxOpacity;
         setBoxOpacity = [CCCallFuncN actionWithTarget:self selector:@selector(setBoxOpacity:)];
         [boxSprite runAction: [CCSequence actions:moveAction , setBoxOpacity , nil]];
@@ -144,7 +124,7 @@
     }
 }
 
-- (void) playerMove:(NSString *)direction
+- (void) playerMove:(Direction *)direction
 {
     [[self player] walk:direction];
     PushBoxStep *step;
@@ -153,22 +133,14 @@
     [lastSteps_ insertObject:step atIndex:0];
 }
 
-- (void) playerPush:(NSString *)direction
+- (void) playerPush:(Direction *)direction
 {
-    int step_distance = _tileMap.tileSize.width;
     CCSprite *boxSprite = [self boxByPlayer:direction];
     [[self player] walk:direction];
     CCMoveBy *moveAction;
     CCCallFunc *checkWin ;
     CCCallFuncN *setBoxOpacity;
-    if(direction == @"down")
-        moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(0.0, -step_distance)] ;
-    if(direction == @"up")
-        moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(0.0, step_distance)] ;
-    if(direction == @"left")
-        moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(-step_distance , 0.0)] ;
-    if(direction == @"right")
-        moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(step_distance , 0.0)] ;
+    moveAction = [CCMoveBy actionWithDuration:0.3 position: CGPointMake(direction.stepSize.width,direction.stepSize.height)] ;
     checkWin = [CCCallFunc actionWithTarget:self selector:@selector(checkWin)];
     setBoxOpacity = [CCCallFuncN actionWithTarget:self selector:@selector(setBoxOpacity:)];
     [boxSprite runAction: [CCSequence actions:moveAction, checkWin ,setBoxOpacity , nil]];
@@ -193,15 +165,16 @@
     }
 }
 
-- (BOOL) playerMoveAble: (NSString *) direction
+- (BOOL) playerMoveAble: (Direction *) direction
 {
     CGPoint playerPos = [self playerSprite].position;
     CCSprite *boxSprite = [self boxByPlayer:direction];
     // not wall and not boxes  then return YES;
+    CCLOG(@"PlayerMoveAble at direction %@ isWall %d , isBox %d" , [direction directionStr] ,[self isWallAtDirection:direction atPosition:playerPos] ,  !!boxSprite);
     return ![self isWallAtDirection:direction atPosition:playerPos] && !boxSprite;
 }
 //TODO box
-- (BOOL)playerPushAble:(NSString *)direction
+- (BOOL)playerPushAble:(Direction *)direction
 {
     CCSprite *boxSprite;
     boxSprite = [self boxByPlayer:direction];
@@ -222,18 +195,11 @@
     }
 }
 
-- (CCSprite *) boxByPlayer: (NSString *) direction
+- (CCSprite *) boxByPlayer: (Direction *) direction
 {
     CGPoint boxPos ;
     CGPoint playerPos = [self playerSprite].position;
-    if(direction == @"left")
-        boxPos = ccp(playerPos.x - 32 , playerPos.y);
-    if(direction == @"right")
-        boxPos = ccp(playerPos.x + 32 , playerPos.y);
-    if(direction == @"down")
-        boxPos = ccp(playerPos.x , playerPos.y - 32);
-    if(direction == @"up")
-        boxPos = ccp(playerPos.x , playerPos.y + 32);  
+    boxPos = ccp(playerPos.x + direction.stepSize.width , playerPos.y + direction.stepSize.height);
     return [self boxAtPosition: boxPos];
 }
 
@@ -263,22 +229,11 @@
     return nil;  
 }
 
-- (CGPoint) nextStep: direction atPosition: (CGPoint) curPos
+- (CGPoint) nextStep: (Direction *)direction atPosition: (CGPoint) curPos
 {
     CGPoint curTiledPos = [self toMapXY: curPos];
     CGPoint nextStep;
-    if (direction == @"left") {
-        nextStep = CGPointMake(curTiledPos.x - 1, curTiledPos.y);
-    }
-    if (direction == @"right") {
-        nextStep = CGPointMake(curTiledPos.x + 1, curTiledPos.y);
-    }
-    if (direction == @"down") {
-        nextStep = CGPointMake(curTiledPos.x , curTiledPos.y + 1);
-    }
-    if (direction == @"up") {
-        nextStep = CGPointMake(curTiledPos.x, curTiledPos.y - 1);
-    }
+    nextStep = CGPointMake(curTiledPos.x + direction.tileStep.x, curTiledPos.y + direction.tileStep.y);
     return nextStep;
 }
 
@@ -288,7 +243,7 @@
     return pos;
 }    
 
-- (BOOL) isWallAtDirection: (NSString *) direction atPosition: (CGPoint) curPos
+- (BOOL) isWallAtDirection: (Direction *) direction atPosition: (CGPoint) curPos
 {
     CGPoint nextStep = [self nextStep: direction atPosition: curPos];
     int tilGid = [_background tileGIDAt: nextStep];

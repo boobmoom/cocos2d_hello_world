@@ -121,6 +121,7 @@
 		5400352D14AEDECD00384EAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5400352C14AEDECD00384EAC /* main.m */; };
 		5400353014AEDECD00384EAC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5400352F14AEDECD00384EAC /* AppDelegate.m */; };
 		5400353314AEDECD00384EAC /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5400353214AEDECD00384EAC /* RootViewController.m */; };
+		5462B5F914D5486C00CFB509 /* Direction.m in Sources */ = {isa = PBXBuildFile; fileRef = 5462B5F814D5486B00CFB509 /* Direction.m */; };
 		546E1A7214C3BBAB00C73A25 /* BoxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 546E1A7114C3BBAB00C73A25 /* BoxMenu.m */; };
 		546E1A7614C3C65F00C73A25 /* StageLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 546E1A7514C3C65F00C73A25 /* StageLayer.m */; };
 		546E1A7814C4157D00C73A25 /* boxes2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 546E1A7714C4157D00C73A25 /* boxes2.tmx */; };
@@ -371,6 +372,8 @@
 		5400353114AEDECD00384EAC /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		5400353214AEDECD00384EAC /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		5400353714AEDECD00384EAC /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
+		5462B5F714D5486B00CFB509 /* Direction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Direction.h; sourceTree = "<group>"; };
+		5462B5F814D5486B00CFB509 /* Direction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Direction.m; sourceTree = "<group>"; };
 		546E1A7014C3BBAB00C73A25 /* BoxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxMenu.h; sourceTree = "<group>"; };
 		546E1A7114C3BBAB00C73A25 /* BoxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxMenu.m; sourceTree = "<group>"; };
 		546E1A7414C3C65F00C73A25 /* StageLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageLayer.h; sourceTree = "<group>"; };
@@ -461,6 +464,8 @@
 				546E1A7114C3BBAB00C73A25 /* BoxMenu.m */,
 				546E1A7414C3C65F00C73A25 /* StageLayer.h */,
 				546E1A7514C3C65F00C73A25 /* StageLayer.m */,
+				5462B5F714D5486B00CFB509 /* Direction.h */,
+				5462B5F814D5486B00CFB509 /* Direction.m */,
 				540033DD14AEDEC900384EAC /* Resources */,
 				540033F114AEDEC900384EAC /* libs */,
 				5400352A14AEDECD00384EAC /* Supporting Files */,
@@ -982,6 +987,7 @@
 				54702CA314C0293E00B6D1DC /* Controller.m in Sources */,
 				546E1A7214C3BBAB00C73A25 /* BoxMenu.m in Sources */,
 				546E1A7614C3C65F00C73A25 /* StageLayer.m in Sources */,
+				5462B5F914D5486C00CFB509 /* Direction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

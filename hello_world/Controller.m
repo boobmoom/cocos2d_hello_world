@@ -97,31 +97,33 @@
 
 -(void) walkDown
 {
-    [self command: @"down"];
+    [self command: [Direction sharedDownDirection]];
 }
 
 -(void) walkUp
 {
-    [self command: @"up"];    
+    [self command: [Direction sharedUpDirection]];    
 }
 
 - (void) walkLeft
 {
-    [self command: @"left"];    
+    [self command: [Direction sharedLeftDirection]];    
 }
 
 - (void) walkRight
 {
-    [self command: @"right"];    
+    [self command: [Direction sharedRightDirection]];    
 }
 
-- (void) command: (NSString *) direction
+- (void) command: (Direction *) direction
 {
     if([gameLayer_ lastCommandExecuting]){return;}
     BOOL check = [gameLayer_ playerMoveAble: direction] ;
     if (check) {
+        CCLOG(@"player MOVE");
         [gameLayer_ playerMove: direction];       
     }else if ([gameLayer_ playerPushAble: direction]){
+        CCLOG(@"player PUSH");
         [gameLayer_ playerPush: direction];
     }    
 }
