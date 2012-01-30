@@ -72,7 +72,7 @@
         [boxSprite runAction: [CCSequence actions:moveAction , setBoxOpacity , nil]];
         
     }else{
-        [[self player] walk:direction back:YES];
+        [[self player] walk:[direction oppositDirection] back:YES];
     }
     [lastSteps_ removeObjectAtIndex:0];
     [lastSteps_ addObject:@"nil"];
