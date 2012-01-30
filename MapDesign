@@ -1,0 +1,18 @@
+制作地图之前需要先学会使用我们的工具
+
+请参考：
+http://www.cnblogs.com/andyque/archive/2011/04/11/2012852.html
+http://www.cnblogs.com/andyque/archive/2011/05/03/2033620.html
+
+把这两篇文章看明白了，就可以进行我们下面的工作了。
+
+
+地图文件按照 boxes1.tmx , boxes2.tmx ,boxes3.tmx ... 放在resource文件夹下
+
+现在我想添加一个地图，
+1 把boxes5.tmx复制一份，起名叫boxes6.tmx，放到resource文件夹下(其实现在已经可以玩第六关了，只不过地图和第5关是一样的)
+2 用tiled地图制作工具打开boxes6.tmx，可以看到一个12＊10的地图。
+3 首先切换到图层background，这样就可以画背景了，注意地图本身用到了哪些图块，这些图块都有什么属性。
+4 然后切换到player图层，player已经好了，你只需要改动他的坐标位置就好。还有box1，box2，box3表示有3个箱子，当然应该和背景上的木牌子一样多，然后命名也是有规律的，相信不用我说了。
+5 随意改动，改完保存以后就可以了，哈哈。
+
