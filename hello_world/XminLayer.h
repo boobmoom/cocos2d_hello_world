@@ -6,6 +6,8 @@
 //  Copyright 2012年 __MyCompanyName__. All rights reserved.
 //
 
+//这个是游戏的主要场景
+
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Player.h"

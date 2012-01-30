@@ -6,6 +6,8 @@
 //  Copyright 2012年 __MyCompanyName__. All rights reserved.
 //
 
+//箱子
+
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Direction.h"

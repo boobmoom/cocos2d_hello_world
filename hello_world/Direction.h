@@ -6,6 +6,8 @@
 //  Copyright 2012年 __MyCompanyName__. All rights reserved.
 //
 
+//四个方向，封装了一下，方便使用
+
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 static CGSize GstepSize;

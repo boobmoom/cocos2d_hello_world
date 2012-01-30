@@ -6,6 +6,9 @@
 //  Copyright 2012年 __MyCompanyName__. All rights reserved.
 //
 
+
+//游戏的控制界面
+
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "XminLayer.h"
