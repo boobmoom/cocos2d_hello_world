@@ -49,6 +49,7 @@
     }else{
         [[self player] walk:[direction oppositDirection] back:YES];
     }
+    [[self scoreBoard] cancelStep];
     [lastSteps_ removeObjectAtIndex:0];
     [lastSteps_ addObject:@"nil"];
     
@@ -73,6 +74,7 @@
         }
     }
     if (s == [_boxes count]){
+        [[self scoreBoard] saveScore];
         //进入下一关
         CCScene *nextScene;
         if([stage_ intValue] < [StageLayer totalStages]){
@@ -95,6 +97,7 @@
 {
     [[self player] walk:direction];
     PushBoxStep *step = [[[PushBoxStep alloc] initWithPlayerStandPos:[self playerSprite].position andDirection: direction boxPushed:NO] autorelease];
+    [[self scoreBoard] oneMoreStep];
     [lastSteps_ removeObjectAtIndex:2];
     [lastSteps_ insertObject:step atIndex:0];
 }
@@ -105,6 +108,7 @@
     [[self player] walk:direction];
     [boxItem move:direction withTarget:self];
     PushBoxStep *step = [[[PushBoxStep alloc] initWithPlayerStandPos:[self playerSprite].position andDirection: direction boxPushed:YES] autorelease];
+    [[self scoreBoard] oneMoreStep];
     [lastSteps_ removeObjectAtIndex:2];
     [lastSteps_ insertObject:step atIndex:0];
 }
@@ -240,6 +244,7 @@
             [_boxes addObject:box];
         }
         [self addMenu];
+        [self addChild:[[ScoreBoard node] loadStage:[stage_ intValue]] z: 0 tag:kTagForScoreBoard];
         //init lastSteps_
         lastSteps_ = [[NSMutableArray alloc] initWithCapacity:3];
         [lastSteps_ addObject:@"nil"];
@@ -249,6 +254,11 @@
     return self;
 }
 
+- (ScoreBoard *) scoreBoard
+{
+    return (ScoreBoard *)[self getChildByTag:kTagForScoreBoard];
+}
+
 
 - (void) addMenu
 {
@@ -256,7 +266,7 @@
     CCMenuItemLabel *mainMenuLabel = [CCMenuItemLabel itemWithLabel:mainMenu  target:self selector:@selector(mainMenu)];
     CCMenu *menu = [CCMenu menuWithItems:mainMenuLabel,nil];
     menu.contentSize = mainMenuLabel.contentSize;
-    menu.position = ccp(384 + menu.contentSize.width/2  , 200 + menu.contentSize.height/2);
+    menu.position = ccp(384 + menu.contentSize.width/2  , 320 - menu.contentSize.height/2);
     [self addChild:menu];
 }
 

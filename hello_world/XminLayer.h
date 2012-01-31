@@ -16,11 +16,13 @@
 #import "Direction.h"
 #import "PushBoxStep.h"
 #import "BoxItem.h"
+#import "ScoreBoard.h"
 
 
 enum {
     kTagForPlayer,
-    kTagForBackground
+    kTagForBackground,
+    kTagForScoreBoard
 };
 @class Controller;
 @class BoxItem;
@@ -46,6 +48,8 @@ enum {
 - (BOOL) isWallAtDirection: (Direction *) direction atPosition: (CGPoint) curPos;
 
 - (CCSprite *) playerSprite;
+
+- (ScoreBoard *) scoreBoard;
 
 - (CGPoint) toMapXY: (CGPoint) position;
 
